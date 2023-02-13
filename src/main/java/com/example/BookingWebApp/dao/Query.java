@@ -35,7 +35,6 @@ public class Query {
             "       ?,\n" +
             "       ?,\n" +
             "       FALSE;";
-
     public static final String checkUser = "SELECT count(*) AS num \n" +
             "              FROM Users U\n " +
             "             WHERE U.Username = ?;";

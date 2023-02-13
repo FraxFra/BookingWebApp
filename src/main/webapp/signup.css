@@ -1,0 +1,125 @@
+html{
+    height: 100%;
+}
+
+body{
+    background-color: #1f2125;
+    max-width: 100% !important;
+    min-height: 100vh;
+    height: 100%;
+    align-items: center;
+    color: whitesmoke;
+    padding: 0 !important;
+    margin: 0;
+}
+
+#navbar{
+    /*position: fixed;*/
+    top: 0;
+    width: 100%;
+    overflow: hidden;
+}
+
+.signup-container{
+    height: 80%;
+    border: 1px solid grey;
+    border-radius: 1%;
+    padding: 20px;
+    line-height: 30px;
+    margin-top:20px;
+}
+
+@media screen and (max-width: 750px){
+    .signup-container.w{
+        width: 90%;
+    }
+
+    .inner-w{
+        min-width: 99%;
+        max-width: 99%;
+    }
+}
+
+@media screen and (min-width: 750px){
+    .signup-container.w{
+        width: 80%;
+    }
+
+    .inner-w{
+        min-width: 90%;
+        max-width: 90%;
+    }
+}
+
+@media screen and (min-width: 1000px){
+    .signup-container.w{
+        width: 60%;
+    }
+
+    .inner-w{
+        min-width: 80%;
+        max-width: 80%;
+    }
+}
+
+
+
+form{
+    padding: 10px;
+    width: 100%;
+    margin-top:20px;
+}
+
+nav em, nav aside{
+    float: left;
+}
+
+.navbar-brand{
+    margin-left: 5px;
+}
+
+input {
+    margin-left: 10px;
+    width: 100%;
+}
+
+#at{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+form .row{
+    margin-top: 10px;
+}
+
+#mail{
+    margin-left: 5px;
+    padding: 7px;
+}
+
+#username{
+    padding: 0px 12px;
+
+}
+.btn-log{
+    border-color:#5D7772 !important;
+    background-color: #B6E2D3 !important;
+    color: black !important;
+}
+
+h1{
+    text-align: center;
+}
+
+.errorMsg{
+    color: red;
+}
+
+.inputError{
+    border-width: 3px;
+}
+
+.thx{
+    margin: 80px 0;
+    text-align: center;
+}

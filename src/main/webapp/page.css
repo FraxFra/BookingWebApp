@@ -1,0 +1,163 @@
+body{
+    /*background-color: #202125;*/
+    background-color: #1f2125;
+    /*background-color: rebeccapurple;*/
+    max-width:100% !important;
+}
+
+.pageContent{
+    width: 100%;
+}
+.burger div{
+    width: 25px;
+    height: 3px;
+    background-color:white;
+    margin: 5px;
+    transition: all 0.3s ease;
+}
+@media screen and (min-width: 992px){
+    .body{
+        overflow-x:hidden ;
+    }
+
+    .burger{
+        display: block;
+    }
+}
+.nav-active{
+    transform: translateX(0%);
+}
+@keyframes navLinkFade {
+    from{
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to{
+        opacity: 1;
+        transform: translateX(0px);
+    }
+}
+
+
+
+.toggle .lin1{
+    transform: rotate(-45deg) translate(-5px,6px);
+}
+
+.toggle .lin2{
+    opacity: 0;
+}
+.toggle .lin3{
+    transform: rotate(45deg) translate(-5px,-6px);
+}
+
+
+h1{
+    color: whitesmoke;
+}
+#navbar{
+    /*position: fixed;*/
+    top: 0;
+    width: 100%;
+    overflow: hidden;
+}
+#pageContainer{
+    margin-top: 5%;
+}
+
+.btn-custom{
+    background-color : #B6E2D3;
+    border-color: #5D7772;
+    margin-left: 5px;
+    font-size:14px;
+    padding:5px 9px 5px 9px;
+
+}
+.btn-custom:hover, .btn-custom:focus{
+    background-color : #B6E2D3 !important;
+    border-color: #5D7772 !important;
+    opacity: .65;
+}
+.icon-custom{
+    color: black;
+    font-size: 14px;
+}
+
+table.table-hover {
+    --bs-table-hover-bg: rgb(75, 79, 82) !important;
+}
+
+.list-li{
+    display : flex;
+    align-items : center;
+    justify-content : space-between;
+    background-color: #2c2e2f;
+    color: whitesmoke;
+    border: 0;
+}
+
+#TeachingModal li:not(:last-child){
+    border-bottom: 1px solid gray !important;
+}
+
+#confirmModal,#errorModal{
+    z-index: 1200;
+}
+
+.teachingHRline{
+    background-color: white !important;
+    opacity: 75%;
+    width: 100%;
+}
+
+.screenreader{
+    clip: rect(1px, 1px, 1px, 1px);
+    clip-path: inset(50%);
+    height: 1px;
+    width: 1px;
+    margin: -1px;
+    padding: 0;
+    position: absolute;
+}
+
+.bookIcon{
+    float: left;
+    margin-left:5px;
+    cursor: initial
+}
+
+.btn-log{
+    border-color:#5D7772 !important;
+    background-color: #B6E2D3 !important;
+    color: black !important;
+}
+
+.filter{
+    color: whitesmoke;
+    background-color:#2c2e2f ;
+    width: 90%;
+    display: block;
+    margin: 0 auto
+}
+
+.textButton{
+    border-color:#5D7772  !important;
+    background-color: #B6E2D3 !important;
+    color: black !important;
+}
+
+.textInput{
+    background-color: grey !important;
+    color: black;
+    opacity:75%
+}
+
+.modal .textInput{
+    opacity: 100% !important;
+}
+
+.modal-colors{
+    background-color: #2c2e2f;
+    color: whitesmoke
+}
+
