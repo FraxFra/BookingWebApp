@@ -15,6 +15,11 @@
   </servlet-mapping>
 
   <servlet-mapping>
+    <servlet-name>pageServlet</servlet-name>
+    <url-pattern>/PageServlet</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
     <servlet-name>TeacherServlet</servlet-name>
     <url-pattern>/TeacherServlet</url-pattern>
   </servlet-mapping>
