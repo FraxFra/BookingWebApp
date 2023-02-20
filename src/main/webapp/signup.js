@@ -199,47 +199,47 @@ var errorUsername = "";
 function signUpRequest(Username,Password,Name,Surname){
     window.location.href = "signup-completed.html";
 
-    // startLoader();
-    // $.ajax({
-    //     url:"PageServlet",
-    //     data:{
-    //         operation:"signup",
-    //         Username:Username,
-    //         Password:Password,
-    //         Name:Name,
-    //         Surname:Surname
-    //     },
-    //     method:"POST",
-    //     timeout: 5000,
-    //     success: function (result){
-    //         if(result.ok){
-    //             window.location.href = "index.jsp";
-    //             //TO DO: è possibile da qui richiamare il login scritto sopra?
-    //         }else{
-    //             if (result.data.length == 0) {
-    //                 errorField(result.error, null, "requestError");
-    //             }else{
-    //                 errorField(result.error,"inUsername");
-    //                 errorUsername = "," + result.data[0].Username;
-    //             }
-    //         }
-    //     },
-    //     error: function (xhr, message, thrownError){
-    //         let error = "";
-    //         if (xhr.status === 500){
-    //             error = "Errore del server";
-    //         }else if (xhr.status === 0 || message === "timeout"){
-    //             error = "La richiesta è andata in timeout";
-    //         }else {
-    //             error = "Errore " + xhr.status + " : " + thrownError;
-    //         }
-    //
-    //         errorField(error, null, "requestError");
-    //     },
-    //     complete: function(jqXHR, textStatus){
-    //         cleanLoader();
-    //     }
-    // });
+    startLoader();
+    $.ajax({
+        url:"PageServlet",
+        data:{
+            operation:"signup",
+            Username:Username,
+            Password:Password,
+            Name:Name,
+            Surname:Surname
+        },
+        method:"POST",
+        timeout: 5000,
+        success: function (result){
+            if(result.ok){
+                window.location.href = "index.jsp";
+                //TO DO: è possibile da qui richiamare il login scritto sopra?
+            }else{
+                if (result.data.length == 0) {
+                    errorField(result.error, null, "requestError");
+                }else{
+                    errorField(result.error,"inUsername");
+                    errorUsername = "," + result.data[0].Username;
+                }
+            }
+        },
+        error: function (xhr, message, thrownError){
+            let error = "";
+            if (xhr.status === 500){
+                error = "Errore del server";
+            }else if (xhr.status === 0 || message === "timeout"){
+                error = "La richiesta è andata in timeout";
+            }else {
+                error = "Errore " + xhr.status + " : " + thrownError;
+            }
+
+            errorField(error, null, "requestError");
+        },
+        complete: function(jqXHR, textStatus){
+            cleanLoader();
+        }
+    });
 }
 
 document.getElementById("inEmail").addEventListener("keydown",function(event){

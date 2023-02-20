@@ -1,0 +1,22 @@
+Modifiche da fare al sito:
+
+Javascript e html:
+-	Sistemare i vari bottoni e menu (chiusura, caricamento, apertura)
+-	Riordinare le pagine e controllare i vari redirect
+
+Grafica
+-	Palette
+-	Menu principale
+-	Calendario
+-	Lookup
+-	Form di registrazione e login
+-	Aggiunta footer
+-	Caratteri accentati e labels
+-	Intestazioni su lookup e calendario
+-	Help text vari
+-	Cambio cursore in base a dove sei
+-	Grafica in generale
+
+DB
+-	Login e registrazione
+-	Login e registrazione prof (?)
