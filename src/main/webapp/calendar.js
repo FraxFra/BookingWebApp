@@ -1,18 +1,18 @@
 function createCalendar(data,isHome){
-    var calendar = $("#calendar");
+    const calendar = $("#calendar");
 
-    var subjectsColors = associateColors(data);
+    const subjectsColors = associateColors(data);
 
-    var myModal = new bootstrap.Modal(document.getElementById('calendarModal'))
+    const myModal = new bootstrap.Modal(document.getElementById('calendarModal'));
 
     let i=1;
 
     const days = [
-        "Lunedì",
-        "Martedì",
-        "Mercoledì",
-        "Giovedì",
-        "Venerdì"
+        "Lunedi",
+        "Martedi",
+        "Mercoledi",
+        "Giovedi",
+        "Venerdi"
     ];
 
     const hours = [
@@ -61,8 +61,13 @@ function createCalendar(data,isHome){
                         a.className = "btn btn-outline-primary";
                         a.href = "#";
                         a.innerText = "Prenota";
-                        a.style.borderColor = "#5D7772";
-                        a.style.color = "whitesmoke";
+                        a.style.background = "#fc4a1a";
+                        a.style.background = "-webkit-linear-gradient(to right, #f7b733, #fc4a1a)";
+                        a.style.background = "linear-gradient(to right, #f7b733, #fc4a1a)";
+                        a.style.color = "#fff";
+                        a.style.border = "1px solid #eee";
+                        a.style.borderRadius = "10px";
+
                         a.setAttribute("v-if", "shared.page='home'")
                         a.onclick = function () {
                             $.ajax({
