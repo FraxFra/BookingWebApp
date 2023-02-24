@@ -53,11 +53,11 @@ public class Query {
             "       S.Name AS SubjectName,\n" +
             "       T.StartTime AS StartTime,\n" +
             "       T.EndTime AS EndTime,\n" +
-            "       CASE WHEN T.WeekDate = 0 THEN 'Lunedì'\n" +
-            "            WHEN T.WeekDate = 1 THEN 'Martedì'\n" +
-            "            WHEN T.WeekDate = 2 THEN 'Mercoledì'\n" +
-            "            WHEN T.WeekDate = 3 THEN 'Giovedì'\n" +
-            "            WHEN T.WeekDate = 4 THEN 'Venerdì'\n" +
+            "       CASE WHEN T.WeekDate = 0 THEN 'Lunedi'\n" +
+            "            WHEN T.WeekDate = 1 THEN 'Martedi'\n" +
+            "            WHEN T.WeekDate = 2 THEN 'Mercoledi'\n" +
+            "            WHEN T.WeekDate = 3 THEN 'Giovedi'\n" +
+            "            WHEN T.WeekDate = 4 THEN 'Venerdi'\n" +
             "            ELSE 'Errore'\n" +
             "           END AS WeekDate,\n" +
             "       D.Id AS TeacherId,\n" +
@@ -95,11 +95,11 @@ public class Query {
             "       G.SubjectId    AS Subject,\n" +
             "       S.StartTime AS SlotStart,\n" +
             "       S.EndTime AS SlotEnd,\n" +
-            "       CASE WHEN S.WeekDate = 0 THEN 'Lunedì'\n" +
-            "            WHEN S.WeekDate = 1 THEN 'Martedì'\n" +
-            "            WHEN S.WeekDate = 2 THEN 'Mercoledì'\n" +
-            "            WHEN S.WeekDate = 3 THEN 'Giovedì'\n" +
-            "            WHEN S.WeekDate = 4 THEN 'Venerdì'\n" +
+            "       CASE WHEN S.WeekDate = 0 THEN 'Lunedi'\n" +
+            "            WHEN S.WeekDate = 1 THEN 'Martedi'\n" +
+            "            WHEN S.WeekDate = 2 THEN 'Mercoledi'\n" +
+            "            WHEN S.WeekDate = 3 THEN 'Giovedi'\n" +
+            "            WHEN S.WeekDate = 4 THEN 'Venerdi'\n" +
             "            ELSE 'Errore'\n" +
             "           END AS WeekDate,\n" +
             "       B.Id AS BookingId,\n" +

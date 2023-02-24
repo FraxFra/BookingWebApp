@@ -28,14 +28,14 @@
 <body >
 
 <main id="document-container" class="container-fluid p-0 m-0">
-    <nav class="navbar navbar-expand-md navbar-dark" style="background-color: #43616f" id="navbar">
+    <nav class="navbar navbar-expand-md navbar-dark" id="navbar">
         <div class="container-fluid">
             <div>
                 <a class="navbar-brand bookIcon" href="#" >
-                    <img src="icon.svg"  width="30" height="30" alt="" />
+                    <img src="bookmark.svg"  width="30" height="30" alt="" />
                 </a>
 
-                <aside   style=" float:left;background-color: #43616f" class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel" >
+                <aside   style=" float:left;" class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel" >
 
                     <div class="offcanvas-header">
                         <div></div>
@@ -46,9 +46,9 @@
                             <li class="nav-item me-1">
                                 <a class="nav-link active me-1" aria-current="page" href="#" v-on:click="refreshPage('home')" data-bs-dismiss="offcanvas" aria-hidden="true">Home</a>
                             </li>
-                            <li class="nav-item me-1">
-                                <a v-if="isLogged" class="nav-link active me-1" aria-current="page" href="#myCalendar" v-on:click="refreshPage('myCalendar')"data-bs-dismiss="offcanvas">Calendario</a>
-                            </li>
+<%--                            <li class="nav-item me-1">--%>
+<%--                                <a v-if="isLogged" class="nav-link active me-1" aria-current="page" href="#myCalendar" v-on:click="refreshPage('myCalendar')"data-bs-dismiss="offcanvas">Calendario</a>--%>
+<%--                            </li>--%>
                             <li>
                                 <a v-if="isLogged" class="nav-link active me-1" aria-current="page" href="#" v-on:click="refreshPage('bookingList')"data-bs-dismiss="offcanvas">Prenotazioni</a>
                             </li>
@@ -94,8 +94,8 @@
 
                 </select>
             </div>
-            <div class="col-lg-9">
-                <table class="table table-dark table-striped table-hover" id ="tabList">
+            <div class="col-lg-6">
+                <table class="table table-striped " id ="tabList">
                     <thead>
                     <tr aria-hidden="true">
                         <th>#</th>
@@ -104,8 +104,8 @@
                         <th>Materia</th>
                         <th>Insegnante</th>
                         <th v-if="isAdmin">Utente</th>
-                        <th>Stato</th>
-                        <th></th>
+                        <th style = "text-align: center;">Stato</th>
+                        <th>Opzioni</th>
                     </tr>
                     </thead>
                     <tbody id = "tabListBody">
@@ -188,28 +188,28 @@
 
                 </select>
             </div>
-            <div class="col-lg-9">
+            <div class="col-lg-6">
                 <table id="calendar" class="table">
                     <tr style="border: none">
                         <th></th>
                         <th aria-hidden="true">
-                            <span class="pc" id="dLun">LUNED&Igrave;</span>
+                            <span class="pc" id="dLun">LUNEDI'</span>
                             <span class="mobile">LUN</span>
                         </th>
                         <th aria-hidden="true">
-                            <span class="pc">MARTED&Igrave;</span>
+                            <span class="pc">MARTEDI'</span>
                             <span class="mobile">MAR</span>
                         </th>
                         <th aria-hidden="true">
-                            <span class="pc">MERCOLED&Igrave;</span>
+                            <span class="pc">MERCOLEDI'</span>
                             <span class="mobile">MER</span>
                         </th>
                         <th aria-hidden="true">
-                            <span class="pc">GIOVED&Igrave;</span>
+                            <span class="pc">GIOVEDI'</span>
                             <span class="mobile">GIO</span>
                         </th>
                         <th aria-hidden="true">
-                            <span class="pc">VENERD&Igrave;</span>
+                            <span class="pc">VENERDI'</span>
                             <span class="mobile">VEN</span>
                         </th>
                     </tr>
@@ -278,7 +278,7 @@
                     <div class="mb-3 row">
                         <label for="loginUsername" class="col-sm-2 col-form-label">Username</label>
                         <div class="col-sm-10">
-                            <input required type="text"  style="color: black; background-color:grey;" id="loginUsername" class="form-control"  >
+                            <input required type="text" id="loginUsername" class="form-control"  >
                         </div>
                     </div>
                     <div class="mb-3 row">

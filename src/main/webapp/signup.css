@@ -3,12 +3,13 @@ html{
 }
 
 body{
-    background-color: #1f2125;
+    /*background-color: #1f2125;*/
+    background: linear-gradient(var(--color-50), var(--color-100));
     max-width: 100% !important;
     min-height: 100vh;
     height: 100%;
     align-items: center;
-    color: whitesmoke;
+    /*color: whitesmoke;*/
     padding: 0 !important;
     margin: 0;
 }
@@ -78,8 +79,27 @@ nav em, nav aside{
     margin-left: 5px;
 }
 
+.navbar
+{
+    background: rgba(251, 217, 173, 0.4) !important;
+}
+
+*.nav-link, *.active
+{
+    color: black !important;
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: 1rem;
+}
+
+*.nav-link:hover, *.active:hover
+{
+    transition-duration: 0.5s;
+    transform: scale(1.03);
+}
+
 input {
-    margin-left: 10px;
+    /*margin-left: 10px;*/
     width: 100%;
 }
 
@@ -101,11 +121,36 @@ form .row{
     padding: 0px 12px;
 
 }
-.btn-log{
-    border-color:#5D7772 !important;
-    background-color: #B6E2D3 !important;
-    color: black !important;
+
+*.btn-outline-primary, *.btn-log, *.textButton{
+    /*background: linear-gradient(to right, var(--color-300), var(--color-400));*/
+    color: black!important;
+    border: 1px solid #2c2e2f;
+    background: linear-gradient(to right, var(--color-400) 50%, var(--color-300) 50%);
+    background-size: 200% 100%;
+    background-position:right bottom;
+    /*margin-left:10px;*/
+    transition:all 0.7s ease;
+    border-radius: 5px;
 }
+*.btn-primary:hover
+{
+    color: black!important;
+    border: 1px solid #2c2e2f;
+}
+
+*.btn-outline-primary:hover, *.textButton:hover, #signUP:hover
+{
+    background-position:left bottom;
+    color: black;
+    border: 1px solid #2c2e2f;
+}
+
+/*.btn-log{*/
+/*    border-color:#5D7772 !important;*/
+/*    background-color: #B6E2D3 !important;*/
+/*    color: black !important;*/
+/*}*/
 
 h1{
     text-align: center;
@@ -122,4 +167,22 @@ h1{
 .thx{
     margin: 80px 0;
     text-align: center;
+}
+
+:root {
+    --color-50:  #fef8ee;
+    --color-100: #feeed6;
+    --color-200: #fbd9ad;
+    --color-300: #f8be79;
+    --color-400: #f59e4d;
+    --color-500: #f17b1e;
+    --color-600: #e26114;
+    --color-700: #bc4912;
+    --color-800: #953a17;
+    --color-900: #783216;
+}
+
+::selection
+{
+    background: var(--color-400);
 }

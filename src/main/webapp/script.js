@@ -23,6 +23,7 @@ $(document).ready(function () {
                 if (result.ok) {
                     window.location.hash = "";
                     window.location.href = "index.jsp";
+                    // window.location.href = "index.html";
                     $("#weather-temp").html("<strong>" + "Sloggato " + JSON.stringify(result) + "</strong>");
                 }else{
                     $("#weather-temp").html("Errore: " + result.error);
@@ -157,6 +158,7 @@ function login(){
                 if (result.ok) {
                     window.location.hash = "";
                     window.location.href = "index.jsp";
+                    // window.location.href = "index.html";
                 }else{
                     loginModal.hide();
                     openError(result.error);
@@ -230,8 +232,8 @@ function loadSubjects(id){
                         let option=document.createElement("option");
                         option.value=subject.value;
                         option.innerText=subject.description;
-                        option.style.color="whitesmoke";
-                        option.style.backgroundColor="#2c2e2f";
+                        // option.style.color="whitesmoke";
+                        // option.style.backgroundColor="#2c2e2f";
                         $(id).append(option);
                     }
 
@@ -264,8 +266,8 @@ function loadTeachers(id){
                         option.value=subject.value;
                         option.innerText=subject.description;
                         $(id).append(option);
-                        option.style.color="whitesmoke";
-                        option.style.backgroundColor="#2c2e2f";
+                        // option.style.color="whitesmoke";
+                        // option.style.backgroundColor="#2c2e2f";
                     }
 
                 }else{
@@ -295,8 +297,8 @@ function loadUsers(){
                     option.value=subject.value;
                     option.innerText=subject.description;
                     $("#userDDLList").append(option);
-                    option.style.color="whitesmoke";
-                    option.style.backgroundColor="#2c2e2f";
+                    // option.style.color="whitesmoke";
+                    // option.style.backgroundColor="#2c2e2f";
                 }
 
             }else{
@@ -347,7 +349,8 @@ function refreshList(){
                     tr.appendChild(createTd(booking.Subject));
                     tr.appendChild(createTd(booking.Teacher));
                     if(role == "true") tr.appendChild(createTd(booking.UserId));
-                    tr.appendChild(createTd(booking.BookingStatus));
+                    tr.appendChild(createTdStatus(booking.BookingStatus));
+                    // tr.appendChild(createTd(booking.BookingStatus));
                     let td=document.createElement("td");
                     if(booking.BookingStatus ==="Attiva") {
                         td.appendChild(createDeleteButton(function () {
@@ -386,10 +389,10 @@ function refreshList(){
                                 method: "POST",
                                 success: function (result) {
                                     if (result.ok) {
-                                        alert("Completata!");
+                                        openError("Completata!", true);
                                         refreshList();
                                     } else {
-                                        alert("Errore: " + result.error);
+                                        openError("Errore: " + result.error);
                                     }
                                 }
                             });
@@ -654,11 +657,12 @@ function newTeaching(teacherID,subjectName, isNullTeacher,teacherName){
         }
     });
 }
-function createTd(innerText){
+function createTd(innerText) {
     let td = document.createElement("td");
-    td.innerText= innerText;
+    td.innerText = innerText;
     return td;
 }
+
 
 function openConfirm(text,fn,...args){
     $("#confirmText").text(text);
@@ -673,6 +677,31 @@ function openError(text, isInfo = false){
     $("#errorText").text(text);
     $("#errorModalLabel").text(isInfo? "Operazione completata" : "Errore");
     errorModal.toggle();
+}
+
+
+function createTdStatus(innerText)
+{
+    let status = document.createElement("td");
+    let statusIcon = document.createElement("img");
+    if (innerText == "Attiva")
+    {
+        statusIcon.src = "book-open.svg";
+        statusIcon.title = "Attiva";
+    }
+    else if(innerText == "Disdetta")
+    {
+        statusIcon.src = "x.svg";
+        statusIcon.title = "Disdetta";
+    }
+    else
+    {
+        statusIcon.src = "check-circle.svg";
+        statusIcon.title = "Effettuata";
+    }
+    status.align = "center";
+    status.appendChild(statusIcon);
+    return status;
 }
 
 function createDeleteButton(fn){

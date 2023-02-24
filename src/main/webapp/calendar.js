@@ -1,4 +1,5 @@
 function createCalendar(data,isHome){
+
     const calendar = $("#calendar");
 
     const subjectsColors = associateColors(data);
@@ -38,7 +39,7 @@ function createCalendar(data,isHome){
         for(let subject of slot_subjects) {
             let badge = document.createElement("div");
             badge.style.backgroundColor = subjectsColors[subject];
-            badge.style.cursor = "pointer";
+            // badge.style.cursor = "pointer";
             badge.innerText = subject;
             badge.className = "badge";
             badge.onclick = function(){
@@ -61,12 +62,12 @@ function createCalendar(data,isHome){
                         a.className = "btn btn-outline-primary";
                         a.href = "#";
                         a.innerText = "Prenota";
-                        a.style.background = "#fc4a1a";
-                        a.style.background = "-webkit-linear-gradient(to right, #f7b733, #fc4a1a)";
-                        a.style.background = "linear-gradient(to right, #f7b733, #fc4a1a)";
-                        a.style.color = "#fff";
-                        a.style.border = "1px solid #eee";
-                        a.style.borderRadius = "10px";
+                        // a.style.background = "#fc4a1a";
+                        // a.style.background = "-webkit-linear-gradient(to right, #f7b733, #fc4a1a)";
+                        // a.style.background = "linear-gradient(to right, #f7b733, #fc4a1a)";
+                        // a.style.color = "#fff";
+                        // a.style.border = "1px solid #eee";
+                        // a.style.borderRadius = "10px";
 
                         a.setAttribute("v-if", "shared.page='home'")
                         a.onclick = function () {
@@ -212,13 +213,23 @@ function getTeacherList(data,slot,subject){
     "cornflowerblue"
 ]*/
 const colors = [
-    "#198754",
-    "#0d6efd",
-    "#dc3545",
-    "#7174c1",
-    "teal",
-    "brown",
-    "cornflowerblue"
+    // "#198754",
+    // "#0d6efd",
+    // "#dc3545",
+    // "#7174c1",
+    // "teal",
+    // "brown",
+    // "cornflowerblue"
+    // "#fef8ee",
+    // "#feeed6",
+    // "#fbd9ad",
+    // "#f8be79",
+    // "#f59e4d",
+    "#f17b1e",
+    "#e26114",
+    "#bc4912",
+    "#953a17",
+    "#783216"
 ];
 
 function getHours(dateString){

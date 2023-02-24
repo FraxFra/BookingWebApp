@@ -13,6 +13,15 @@ $("#signUP").on("click",function (){
     }
 });
 
+// document.querySelector(window).scroll(function() {
+//     if (document.querySelector(this).scrollTop > 400) {
+//         document.querySelector( ".navbar" ).fadeIn();
+//     } else {
+//         console.log('there');
+//         document.querySelector( ".navbar" ).fadeOut();
+//     }
+// });
+
 function checkAllFields(Name,Email,Domain,Surname,Password,Username,verify, BirthDate,BirthTown){
     let r = true;
     r = checkName(Name) && r ;
@@ -214,6 +223,7 @@ function signUpRequest(Username,Password,Name,Surname){
         success: function (result){
             if(result.ok){
                 window.location.href = "index.jsp";
+                // window.location.href = "index.html";
                 //TO DO: è possibile da qui richiamare il login scritto sopra?
             }else{
                 if (result.data.length == 0) {
@@ -252,4 +262,5 @@ document.getElementById("inEmail").addEventListener("keydown",function(event){
 
 document.getElementById("btnLogin").addEventListener("click", function(event){
     window.location.href = "index.jsp#login" + errorUsername;
+    // window.location.href = "index.html#login" + errorUsername;
 })

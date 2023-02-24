@@ -1,14 +1,25 @@
+.badge
+{
+    /*background-color: var(--color-500);*/
+    cursor: pointer;
+}
+body
+{
+    background: linear-gradient(var(--color-50), var(--color-100));
 
+}
 #calendar td {
     /*border: 1px solid #36383c;*/
     height: 16vh;
     min-width: 15%;
     min-height: 100px;
-    background-color: #2c2e2f;
+    background-color: var(--color-300);
+    /*background: linear-gradient(var(--color-200), var(--color-300));*/
     /*background-color: #E3E8F0;*/
     padding: 3px;
     text-overflow: ellipsis;
-    max-width: 1
+    /*max-width: 1*/
+    color: #2c2e2f;
 
 }
 
@@ -20,11 +31,16 @@
     overflow: hidden;
 }
 
-.btn-outline-primary:hover{
-    background-color: #B6E2D3 !important;
-    color: black !important;
-    border-color: #5D7772 !important;
+*.badge:hover {
+    transition-duration: 0.7s;
+    transform: scale(1.1);
 }
+
+/*.btn-outline-primary:hover{*/
+/*    background-color: #B6E2D3 !important;*/
+/*    color: black !important;*/
+/*    border-color: #5D7772 !important;*/
+/*}*/
 
 #calendar{
     width:90%;
@@ -50,8 +66,9 @@
 
 #calendar td,th{
     /*border:2px solid #E3E8F0;*/
-    border-right: 1px solid #555;
-    border-bottom: 1px solid #555;
+    /*border-right: 1px solid #555;*/
+    /*border-bottom: 1px solid #555;*/
+    border: 1px solid #ced4da;
 
     max-width: 12vw;
 
@@ -63,15 +80,16 @@
     text-align: center;
     /*border: 1px solid #36383c;*/
     height: 40px;
-    background-color: #2c2e2f;
-    color:#f2f4f6;
+    background-color: var(--color-300);
+    color: #2c2e2f;
     overflow: hidden;
     text-overflow: "" !important;
     white-space: nowrap;
 }
 
 #calendar .hour{
-    color:#f2f4f6;
+    color:#2c2e2f;
+    font-weight: bold;
 }
 @media screen and (max-width: 1024px) {
     #calendar {
@@ -101,21 +119,28 @@
 }
 
 #calendarModalList{
-    border-radius: 0 !important;
+    border-radius: 5px !important;
 }
 
 .calendar-li{
     display : flex;
     align-items : center;
     justify-content : space-between;
-    background-color: #2c2e2f;
-    color: whitesmoke;
-    border: 0;
+    /*background-color: #2c2e2f;*/
+    /*color: whitesmoke;*/
+    background: var(--color-300);
+    color: black;
+    border: 1px outset var(--color-200);
+    border-radius: 5px;
+}
+*.calendar-li:hover{
+    transition-duration: 0.3s;
+    transform: scale(1.01);
 }
 
-#calendarModalList li:not(:last-child){
-    border-bottom: 1px solid gray !important;
-}
+/*#calendarModalList li:not(:last-child){*/
+/*    border-bottom: 1px solid gray !important;*/
+/*}*/
 
 /*#test-slot{
     display: inline-block;
@@ -126,3 +151,68 @@
     border:1px solid red;
     border-radius: 10%;
 }*/
+.form-select{
+    background-color: var(--color-300);
+    color: black;
+    cursor: pointer;
+}
+
+.form-select option{
+    background-color: var(--color-300) !important;
+    color: black !important;
+}
+
+*.btn-outline-primary, *.btn-log, *.textButton{
+    /*background: linear-gradient(to right, var(--color-300), var(--color-400));*/
+    color: black;
+    border: 1px solid #2c2e2f;
+    background: linear-gradient(to right, var(--color-400) 50%, var(--color-300) 50%);
+    background-size: 200% 100%;
+    background-position:right bottom;
+    margin-left:10px;
+    transition:all 0.7s ease;
+    border-radius: 5px;
+}
+*.btn-outline-primary:hover, *.textButton:hover
+{
+    background-position:left bottom;
+    color: black;
+    border: 1px solid #2c2e2f;
+}
+/**.btn-log:hover
+{
+    box-shadow: 20px 20px 50px black;
+}*/
+
+.btn, .badge, .form-select, .modal-colors
+{
+    border-radius: 5px;
+}
+/*.form-select,*/ .modal-colors, .list-group
+{
+    color:black;
+    background: var(--color-300);
+}
+
+.form-control
+{
+    background: var(--color-100);
+}
+
+:root {
+    --color-50:  #fef8ee;
+    --color-100: #feeed6;
+    --color-200: #fbd9ad;
+    --color-300: #f8be79;
+    --color-400: #f59e4d;
+    --color-500: #f17b1e;
+    --color-600: #e26114;
+    --color-700: #bc4912;
+    --color-800: #953a17;
+    --color-900: #783216;
+}
+
+::selection
+{
+    background: var(--color-400);
+}

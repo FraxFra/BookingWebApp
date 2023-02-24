@@ -142,23 +142,23 @@
                 <tr style="border: none">
                     <th></th>
                     <th>
-                        <span class="pc">LUNED&Igrave;</span>
+                        <span class="pc">LUNEDI</span>
                         <span class="mobile">LUN</span>
                     </th>
                     <th>
-                        <span class="pc">MARTED&Igrave;</span>
+                        <span class="pc">MARTEDI</span>
                         <span class="mobile">MAR</span>
                     </th>
                     <th>
-                        <span class="pc">MERCOLED&Igrave;</span>
+                        <span class="pc">MERCOLEDI</span>
                         <span class="mobile">MER</span>
                     </th>
                     <th>
-                        <span class="pc">GIOVED&Igrave;</span>
+                        <span class="pc">GIOVEDI</span>
                         <span class="mobile">GIO</span>
                     </th>
                     <th>
-                        <span class="pc">VENERD&Igrave;</span>
+                        <span class="pc">VENERDI</span>
                         <span class="mobile">VEN</span>
                     </th>
                 </tr>
