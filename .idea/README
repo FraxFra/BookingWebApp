@@ -3,20 +3,23 @@ Modifiche da fare al sito:
 Javascript e html:
 -	Sistemare i vari bottoni e menu (chiusura, caricamento, apertura)
 -	Riordinare le pagine e controllare i vari redirect
+-   Levare dropdown per materia e docente, aggiungere checkbox con selezione multipla
 
 Grafica
--	Palette
+-	Palette [V]
 -	Menu principale
 -	Calendario
--	Lookup
--	Form di registrazione e login
+-	Lookup [V]
+-	Form di registrazione e login cambiare campo mail e rimpicciolire
 -	Aggiunta footer
--	Caratteri accentati e labels
+-	Caratteri accentati e labels [V]
 -	Intestazioni su lookup e calendario
 -	Help text vari
 -	Cambio cursore in base a dove sei
 -	Grafica in generale
+-   Footer basico
+-   Scroll su lista prenotazioni
 
 DB
--	Login e registrazione
--	Login e registrazione prof (?)
+-	Login e registrazione [V]
+-	Login e registrazione prof [X]
