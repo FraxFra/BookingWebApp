@@ -95,8 +95,8 @@ $(document).ready(function () {
         var verify=$("#vsignUpPsw").val().trim();
         console.log(Name);
         console.log(Surname);
-        console.log(Username);
-        console.log(Password);
+        // console.log(Username);
+        // console.log(Password);
         console.log(verify);
         if(Password&&verify&&Password==verify){
             $.ajax({
@@ -143,8 +143,8 @@ $(document).ready(function(){
 function login(){
     var Username= $("#loginUsername").val().trim();
     var Password= $("#loginPassword").val().trim();
-    console.log(Username);
-    console.log(Password);
+    // console.log(Username);
+    // console.log(Password);
     if (Username && Password){
         $.ajax({
             url: "PageServlet",

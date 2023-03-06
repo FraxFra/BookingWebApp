@@ -3,11 +3,19 @@ var vm= new Vue(
         data: {
             page: "home",
             isLogged: role !== "null",
-            username:username,
+            // isLogged: this.username !== "",
+            username:this.username,
             isAdmin:role === "null"
         },
         el:"#document-container",
         mounted(){
+            document.cookie = "";
+            this.username = document.cookie;
+            console.log(document.cookie);
+            if (this.username)
+            {
+                this.isLogged = true;
+            }
             var x= window.location.hash, y = "";
 
             let params = x.split(",");
@@ -25,7 +33,19 @@ var vm= new Vue(
             }else{
                 x="home";
                 $("#loginUsername").val(y);
+
                 (new bootstrap.Modal(document.getElementById('exampleModalToggle'))).toggle();
+            }
+        },
+        watch: {
+            username: function (val){
+                this.username = val;
+                if(this.username != document.cookie)
+                {
+                    document.cookie = this.username;
+                }
+                // console.log("username   " + this.username+"\n islogged   " + this.isLogged);
+                console.log("Valore " + document.cookie);
             }
         },
         methods: {
@@ -72,6 +92,42 @@ var vm= new Vue(
                 else if (this.page === "bookingList")
                     refreshList();
 
+            },
+            login(){
+                var Username= this.username;
+                var Password= $("#loginPassword").val().trim();
+                // console.log(Username);
+                // console.log(Password);
+                if (Username && Password){
+                    $.ajax({
+                        url: "PageServlet",
+                        data: {
+                            operation:"login",
+                            Username:Username,
+                            Password:Password
+                        },
+                        method:"POST",
+                        success: function( result ) {
+                            this.isLogged = true;
+                            // this.isLogged = true;
+                            // console.log(this.isLogged);
+                            // username = this.username;
+                            // console.log(username);
+                            if (result.ok) {
+                                // document.getElementById("role").innerHTML = this.isLogged;
+                                // console.log("Username" + document.getElementById("username").innerHTML);
+                                window.location.hash = "";
+                                window.location.href = "index.html";
+                                // window.location.href = "index.html";
+                            }else{
+                                loginModal.hide();
+                                openError(result.error);
+                            }
+                        }
+                    });
+                }else{
+                    alert("Inserire tutti i campi!");
+                }
             }
         }
 
