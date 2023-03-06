@@ -222,7 +222,7 @@ function signUpRequest(Username,Password,Name,Surname){
         timeout: 5000,
         success: function (result){
             if(result.ok){
-                window.location.href = "index.jsp";
+                window.location.href = "index.html";
                 // window.location.href = "index.html";
                 //TO DO: è possibile da qui richiamare il login scritto sopra?
             }else{
@@ -261,6 +261,6 @@ document.getElementById("inEmail").addEventListener("keydown",function(event){
 })
 
 document.getElementById("btnLogin").addEventListener("click", function(event){
-    window.location.href = "index.jsp#login" + errorUsername;
+    window.location.href = "index.html#login" + errorUsername;
     // window.location.href = "index.html#login" + errorUsername;
 })

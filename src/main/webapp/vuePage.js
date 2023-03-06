@@ -4,7 +4,7 @@ var vm= new Vue(
             page: "home",
             isLogged: role !== "null",
             username:username,
-            isAdmin:role === "true"
+            isAdmin:role === "null"
         },
         el:"#document-container",
         mounted(){

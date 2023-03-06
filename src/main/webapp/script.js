@@ -4,9 +4,9 @@ var loginModal= null;
 var teachingModal=null;
 $(document).ready(function () {
 
-    $("#loginButton").on("click",function () {
+    /*$("#loginButton").on("click",function () {
         login();
-    });
+    });*/
     $("#loginPassword").on("keypress",function(event){
         if(event.which==13){
             login();
@@ -22,8 +22,8 @@ $(document).ready(function () {
             success: function( result ) {
                 if (result.ok) {
                     window.location.hash = "";
-                    window.location.href = "index.jsp";
-                    // window.location.href = "index.html";
+                    window.location.href = "index.html";
+                    // window.location.href = "index.jsp";
                     $("#weather-temp").html("<strong>" + "Sloggato " + JSON.stringify(result) + "</strong>");
                 }else{
                     $("#weather-temp").html("Errore: " + result.error);
@@ -157,7 +157,7 @@ function login(){
             success: function( result ) {
                 if (result.ok) {
                     window.location.hash = "";
-                    window.location.href = "index.jsp";
+                    window.location.href = "index.html";
                     // window.location.href = "index.html";
                 }else{
                     loginModal.hide();
