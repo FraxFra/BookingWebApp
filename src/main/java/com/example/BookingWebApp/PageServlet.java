@@ -1,12 +1,7 @@
 package com.example.BookingWebApp;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Enumeration;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 
@@ -17,21 +12,24 @@ import com.example.BookingWebApp.permissions.PermissionManager;
 import com.google.gson.Gson;
 
 @WebServlet(name = "pageServlet", value = "/PageServlet")
-public class PageServlet extends HttpServlet {
+public class PageServlet extends HttpServlet
+{
     public static final String ERROR_ALREADYLOGGED = "Sei già loggato nel sito";
     public static final String ERROR_WRONGLOGIN = "Username o password sbagliati";
     public static final String ERROR_NOLOGGED = "Non sei loggato";
     public static final String ERROR_ALREADYREGISTERED = "Questo username è già utilizzato. Se sei tu, puoi fare il login";
 
 
-    public void init() {
+    public void init()
+    {
         DAO.registerDriver();
     }
 
     @Override
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,IOException {        response.setContentType("text/json;charset=UTF-8");
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException
+    {
+        response.setContentType("text/json;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
-
 
         Gson gson = new Gson();
         PrintWriter out = response.getWriter();
@@ -44,30 +42,31 @@ public class PageServlet extends HttpServlet {
 
         String username;
         String password;
-
-        System.out.println("a");
         Enumeration<String> e = request.getParameterNames();
-        while(e.hasMoreElements()) {
+        /*while(e.hasMoreElements())
+        {
             System.out.println(e.nextElement());
-        }
-        System.out.println("b");
-        switch (operation) {
+        }*/
+        switch (operation)
+        {
             case "login":
                 username = request.getParameter("Username");
                 password = request.getParameter("Password");
 
-                if (PermissionManager.checkBoth(request)) {
+                if (PermissionManager.checkBoth(request))
+                {
                     result = new Result<>();
-
                     result.setError(ERROR_ALREADYLOGGED);
-                } else {
+                }
+                else
+                {
                     result = DAO.login(username, password);
-
                     loginUser(result, request);
                 }
                 jsonResult = gson.toJson(result);
                 out.println(jsonResult);
                 break;
+
             case "signup":
                 username = request.getParameter("Username");
                 password = request.getParameter("Password");
@@ -145,9 +144,8 @@ public class PageServlet extends HttpServlet {
     }
 
     private void logoutUser(HttpServletRequest request){
-        HttpSession session = request.getSession();
-
-        session.invalidate();
+        //HttpSession session = request.getSession();
+        //session.invalidate();
     }
 
     public void destroy() {

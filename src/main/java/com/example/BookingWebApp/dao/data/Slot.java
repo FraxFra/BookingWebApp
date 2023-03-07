@@ -2,7 +2,8 @@ package com.example.BookingWebApp.dao.data;
 
 import java.sql.Time;
 
-public class Slot {
+public class Slot
+{
     public String TeacherName;
     public String TeacherSurname;
     public String SubjectName;
@@ -14,7 +15,8 @@ public class Slot {
     public Integer BookingId;
     public String UserId;
 
-    public Slot(String teacherName, String teacherSurname, String subjectName, Time startTime, Time endTime, String weekDate, int teacherId, int slotId, Integer bookingId, String userId) {
+    public Slot(String teacherName, String teacherSurname, String subjectName, Time startTime, Time endTime, String weekDate, int teacherId, int slotId, Integer bookingId, String userId)
+    {
         TeacherName = teacherName;
         TeacherSurname = teacherSurname;
         SubjectName = subjectName;

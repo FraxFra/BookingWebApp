@@ -188,36 +188,43 @@ public class DAO {
         return out;
     }
 
-    public static Result<User> login(String username, String password) {
+    public static Result<User> login(String username, String password) //returns the User that is trying to log in
+    {
         Connection conn1 = null;
         Result<User> out = new Result<User>();
-        try {
+        try
+        {
             conn1 = getConnection();
-            if (conn1 != null) {
+            if (conn1 != null)
+            {
                 System.out.println("Connected to the database test");
             }
 
-            ResultSet rs = getPreparedStatement(conn1, Query.login, new Object[]{
-                    username,
-                    password
-            }).executeQuery();
-            while (rs.next()) {
+            ResultSet rs = getPreparedStatement(conn1, Query.login, new Object[] {username, password}).executeQuery();
+            while (rs.next())
+            {
                 User p = new User(rs.getString("UserName"),
                         rs.getString("Name"),
                         rs.getString("Surname"),
                         rs.getBoolean("Role")
                 );
-
                 out.add(p);
             }
-        } catch (SQLException e) {
+        }
+        catch (SQLException e)
+        {
             System.out.println(e.getMessage());
             out.setError("Errore db: " + e.getMessage() + "<br>" + Arrays.toString(e.getStackTrace()));
-        } finally {
-            if (conn1 != null) {
-                try {
+        }
+        finally
+        {
+            if (conn1 != null)
+            {
+                try
+                {
                     conn1.close();
-                } catch (SQLException e2) {
+                } catch (SQLException e2)
+                {
                     System.out.println(e2.getMessage());
                 }
             }

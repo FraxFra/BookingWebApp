@@ -4,43 +4,53 @@ var vm= new Vue(
             page: "home",
             isLogged: role !== "null",
             // isLogged: this.username !== "",
-            username:this.username,
-            isAdmin:role === "null"
+            username: this.username,
+            isAdmin: role === "null"
         },
+
         el:"#document-container",
-        mounted(){
+        mounted()
+        {
             document.cookie = "";
             this.username = document.cookie;
             console.log(document.cookie);
+
             if (this.username)
             {
                 this.isLogged = true;
             }
-            var x= window.location.hash, y = "";
+            var x = window.location.hash, y = "";
 
             let params = x.split(",");
 
-            if (x.length > 1){
+            if (x.length > 1)
+            {
                 x = params[0];
                 y = params[1];
             }
-            if(!x){
-                x="home";
+            if(!x)
+            {
+                x = "home";
             }
-            x = x.replaceAll("#", "");
-            if (x!== "login") {
-                this.refreshPage(x);
-            }else{
-                x="home";
-                $("#loginUsername").val(y);
 
+            x = x.replaceAll("#", "");
+            if (x !== "login")
+            {
+                this.refreshPage(x);
+            }
+            else
+            {
+                x = "home";
+                $("#loginUsername").val(y);
                 (new bootstrap.Modal(document.getElementById('exampleModalToggle'))).toggle();
             }
         },
+
         watch: {
-            username: function (val){
+            username: function (val)
+            {
                 this.username = val;
-                if(this.username != document.cookie)
+                if(this.username !== document.cookie)
                 {
                     document.cookie = this.username;
                 }
@@ -48,24 +58,35 @@ var vm= new Vue(
                 console.log("Valore " + document.cookie);
             }
         },
+
         methods: {
-            refreshPage:function (page) {
-                this.page=page;
-                window.location.hash=page;
+            refreshPage: function (page) //switch between pages by the anchor page and refresh the page selected
+            {
+                this.page = page;
+                window.location.hash = page; //set anchor (#...)
                 this.showAndHidePages(page);
-                switch (page){
-                    case "home": refreshCalendar(true); break;
-                    case "myCalendar":refreshCalendar(false);break;
-                    case "bookingList": refreshList();break;
-                    case "teacher":refreshTeacher();break;
-                    case "subjects":refreshSubjects();break;
+                switch (page)
+                {
+                    case "home": refreshCalendar(true);
+                    break;
+                    case "myCalendar":refreshCalendar(false);
+                    break;
+                    case "bookingList": refreshList();
+                    break;
+                    case "teacher":refreshTeacher();
+                    break;
+                    case "subjects":refreshSubjects();
+                    break;
                 }
             },
-            showAndHidePages: function(page){
-                switch (page){
+
+            showAndHidePages: function(page) //hide every element except the page selected
+            {
+                switch (page)
+                {
                     case "home":
                     case "myCalendar":
-                        $(".pageContent:not(#pageCalendar,#pageContainer)").hide();
+                        $(".pageContent:not(#pageCalendar,#pageContainer)").hide(); //JQuery function used to hide element
                         $("#pageCalendar").show();
                         break;
                     case "bookingList":
@@ -83,9 +104,9 @@ var vm= new Vue(
                 }
                 var myOffcanvas = document.getElementById('offcanvasNavbar');
                 var bsOffcanvas = new bootstrap.Offcanvas(myOffcanvas);
-
                 bsOffcanvas.hide();
             },
+
             filterChange: function(event) {
                 if (this.page === "home" || this.page === "myCalendar")
                     refreshCalendar(this.page === "home");
@@ -93,42 +114,53 @@ var vm= new Vue(
                     refreshList();
 
             },
-            login(){
-                var Username= this.username;
-                var Password= $("#loginPassword").val().trim();
+
+            login() //login function
+            {
+                var Username = this.username;
+                var Password = $("#loginPassword").val().trim();
                 // console.log(Username);
                 // console.log(Password);
-                if (Username && Password){
+                if (Username && Password)
+                {
                     $.ajax({
                         url: "PageServlet",
                         data: {
-                            operation:"login",
-                            Username:Username,
-                            Password:Password
+                            operation: "login",
+                            Username: Username,
+                            Password: Password
                         },
                         method:"POST",
-                        success: function( result ) {
-                            this.isLogged = true;
+                        success: function(result)
+                        {
                             // this.isLogged = true;
                             // console.log(this.isLogged);
                             // username = this.username;
                             // console.log(username);
-                            if (result.ok) {
+                            if (result.ok)
+                            {
+                                this.role = result.data[0].role;
                                 // document.getElementById("role").innerHTML = this.isLogged;
                                 // console.log("Username" + document.getElementById("username").innerHTML);
                                 window.location.hash = "";
                                 window.location.href = "index.html";
                                 // window.location.href = "index.html";
-                            }else{
+                            }
+                            else
+                            {
                                 loginModal.hide();
                                 openError(result.error);
                             }
                         }
                     });
-                }else{
+                }
+                else
+                {
                     alert("Inserire tutti i campi!");
                 }
             }
+
+
         }
 
     }

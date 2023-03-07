@@ -140,7 +140,7 @@ $(document).ready(function(){
 
 });
 
-function login(){
+/*function login(){
     var Username= $("#loginUsername").val().trim();
     var Password= $("#loginPassword").val().trim();
     // console.log(Username);
@@ -168,7 +168,7 @@ function login(){
     }else{
         alert("Inserire tutti i campi!");
     }
-}
+}*/
 
 function refreshCalendar(isHome){
     var subject=$("#subjectDDL").val().trim();
