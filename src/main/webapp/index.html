@@ -13,7 +13,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="calendar.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="script.js"></script>
+<!--    <script src="script.js"></script>-->
     <script>
         var username = "" ;
         console.log(username);
@@ -61,7 +61,7 @@
                 <div>
                     <a v-if="!isLogged" class="btn btn-primary btn-log" data-bs-toggle="modal" href="#exampleModalToggle" role="button" id="loginBtn">Accedi/Registrati</a>
                     <a v-if="isLogged" class="btn disabled btn-log"  role="button" id="userInfo"><i class="bi bi-person-circle"></i>&nbsp;{{username}} </a>
-                    <a v-if="isLogged" class="btn btn-primary btn-log"  role="button" id="btnLogout" >Logout</a>
+                    <a v-if="isLogged" v-on:click="logout" class="btn btn-primary btn-log"  role="button" id="btnLogout" >Logout</a>
 
                 </div>
                 <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
@@ -274,7 +274,6 @@
                             <label for="loginUsername" class="col-sm-2 col-form-label">Username</label>
                             <div class="col-sm-10">
                                 <input v-model="username" required type="text" id="loginUsername" class="form-control"  >
-                                <p> {{ isLogged }}</p>
                             </div>
                         </div>
                         <div class="mb-3 row">

@@ -144,8 +144,8 @@ public class PageServlet extends HttpServlet
     }
 
     private void logoutUser(HttpServletRequest request){
-        //HttpSession session = request.getSession();
-        //session.invalidate();
+        HttpSession session = request.getSession();
+        session.invalidate();
     }
 
     public void destroy() {
