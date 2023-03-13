@@ -4,7 +4,7 @@ html{
 
 body{
     /*background-color: #1f2125;*/
-    background: linear-gradient(var(--color-50), var(--color-100));
+    background: linear-gradient(to right, var(--color-50), var(--color-100));
     max-width: 100% !important;
     min-height: 100vh;
     height: 100%;
@@ -23,11 +23,13 @@ body{
 
 .signup-container{
     height: 80%;
-    border: 1px solid grey;
+    background: linear-gradient( var(--color-100), var(--color-200)) !important;
+    border: 1px solid var(--color-300)  !important;
     border-radius: 1%;
     padding: 20px;
     line-height: 30px;
-    margin-top:20px;
+    box-shadow: 5px 6px 40px -3px var(--color-200) !important;
+    margin-top: 20px;
 }
 
 @media screen and (max-width: 750px){
@@ -112,10 +114,10 @@ form .row{
     margin-top: 10px;
 }
 
-#mail{
-    margin-left: 5px;
-    padding: 7px;
-}
+/*#mail{*/
+/*    margin-left: 5px;*/
+/*    padding: 7px;*/
+/*}*/
 
 #username{
     padding: 0px 12px;
@@ -164,25 +166,32 @@ h1{
     border-width: 3px;
 }
 
+@media (min-width: 768px){
+    .col-md-6 {
+        flex: 0 0 auto;
+        width: 100%;
+    }
+}
+
 .thx{
-    margin: 80px 0;
-    text-align: center;
+margin: 80px 0;
+text-align: center;
 }
 
 :root {
-    --color-50:  #fef8ee;
-    --color-100: #feeed6;
-    --color-200: #fbd9ad;
-    --color-300: #f8be79;
-    --color-400: #f59e4d;
-    --color-500: #f17b1e;
-    --color-600: #e26114;
-    --color-700: #bc4912;
-    --color-800: #953a17;
-    --color-900: #783216;
+--color-50:  #fef8ee;
+--color-100: #feeed6;
+--color-200: #fbd9ad;
+--color-300: #f8be79;
+--color-400: #f59e4d;
+--color-500: #f17b1e;
+--color-600: #e26114;
+--color-700: #bc4912;
+--color-800: #953a17;
+--color-900: #783216;
 }
 
 ::selection
 {
-    background: var(--color-400);
+background: var(--color-400);
 }

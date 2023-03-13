@@ -2,13 +2,14 @@ $("#signUP").on("click",function (){
     var Name= $("#inNome").val().trim();
     var Surname= $("#inCognome").val().trim();
     var Email=$("#inEmail").val().trim();
-    var Domain=$("#inDomain").val().trim();
+    // var Domain=$("#inDomain").val().trim();
+    var Domain=$("#inEmail").val().trim();
     var Username= $("#inUsername").val().trim();
     var Password= $("#inPassword").val().trim();
     var verify=$("#inRipetiPassword").val().trim();
     var BirthDate=$("#inDataNascita").val();
-    var BirthTown=$("#inCittaNascita").val().trim();
-    if(checkAllFields(Name,Email,Domain,Surname,Password,Username,verify,BirthDate,BirthTown)){
+    // var BirthTown=$("#inCittaNascita").val().trim();
+    if(checkAllFields(Name,Email,Domain,Surname,Password,Username,verify,BirthDate/*,BirthTown*/)){
         signUpRequest(Username,Password,Name,Surname);
     }
 });
@@ -22,7 +23,7 @@ $("#signUP").on("click",function (){
 //     }
 // });
 
-function checkAllFields(Name,Email,Domain,Surname,Password,Username,verify, BirthDate,BirthTown){
+function checkAllFields(Name,Email,Domain,Surname,Password,Username,verify, BirthDate/*,BirthTown*/){
     let r = true;
     r = checkName(Name) && r ;
     r = checkEmail(Email,Domain) && r;
@@ -30,7 +31,7 @@ function checkAllFields(Name,Email,Domain,Surname,Password,Username,verify, Birt
     r = checkPassword(Password,verify) && r;
     r = checkUsername(Username) && r;
     r = checkBirthDate(BirthDate) && r;
-    r = checkBirthTown(BirthTown) && r;
+    // r = checkBirthTown(BirthTown) && r;
     return r;
 }
 function errorField(msg,id,idSpanP = null) {
@@ -42,7 +43,7 @@ function errorField(msg,id,idSpanP = null) {
         $("#" + id).addClass("inputError");
         $("#" + id).addClass("is-invalid");
 
-        document.getElementById(id).addEventListener("keydown", resetFieldEventListener);
+        // document.getElementById(id).addEventListener("keydown", resetFieldEventListener);
     }
 }
 
@@ -111,27 +112,50 @@ function checkUsername(Username){
     }
     return true;
 }
-function checkEmail(emailName,emailDomain){
+function checkEmail(emailName,emailDomain)
+{
+    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(emailName))
+    {
+        return true;
+    }
+    errorField("Indirizzo email non valido","inDomain","inEmailError");
+    return false;
+}
+
+
+    /*
+    if(emailDomain.includes("@") && emailDomain.includes("."))
+    {
+        emailDomain = emailDomain.substring(emailDomain.lastIndexOf("@")+1, emailDomain.length);
+    }
+    else
+    {
+        errorField("Dominio della mail non valido primo errore","inDomain","inEmailError");
+    }
+    emailName = emailName.substring(0, emailName.lastIndexOf("@"));
+    console.log(emailName + "    " + emailDomain);
+
+
     if(!emailName||!emailDomain){
         if(!emailName)
-            errorField("Inserire l'email","inEmail","inEmailError");
+            errorField("Inserire l'email n","inEmail","inEmailError");
         if(!emailDomain)
-            errorField("Inserire l'email","inDomain","inEmailError");
+            errorField("Inserire l'email e il dominio","inDomain","inEmailError");
         return false;
     }
     if(!checkAlphanumericDot(emailName)||!checkAlphanumericDot(emailDomain)){
         if(!checkAlphanumericDot(emailName))
-            errorField("Caratteri non validi nella mail","inEmail","inEmailError");
+            errorField("Caratteri non validi nella mail a","inEmail","inEmailError");
         if(!checkAlphanumericDot(emailDomain))
-            errorField("Caratteri non validi nella mail","inDomain","inEmailError");
+            errorField("Caratteri non validi nella mail d","inDomain","inEmailError");
         return false;
     }else{
         if(!emailDomain.includes(".")||emailDomain.lastIndexOf(".")===emailDomain.length-1){
             errorField("Dominio della mail non valido","inDomain","inEmailError");
         }
     }
-    return true;
-}
+    return true;*/
+// }
 function checkPassword(Password,verify){
     if(!Password||!verify) {
         if (!verify) {
@@ -252,13 +276,13 @@ function signUpRequest(Username,Password,Name,Surname){
     });
 }
 
-document.getElementById("inEmail").addEventListener("keydown",function(event){
-    if (event.key === "@"){
-        $("#inDomain").focus();
-        event.preventDefault();
-        return false;
-    }
-})
+// document.getElementById("inEmail").addEventListener("keydown",function(event){
+//     if (event.key === "@"){
+//         $("#inDomain").focus();
+//         event.preventDefault();
+//         return false;
+//     }
+// })
 
 document.getElementById("btnLogin").addEventListener("click", function(event){
     window.location.href = "index.html#login" + errorUsername;
