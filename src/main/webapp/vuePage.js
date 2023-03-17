@@ -10,6 +10,11 @@ var vm = new Vue({
         loginModal: null,
         teachingModal: null,
         myModal: null,
+        materie: [],
+        professori: [],
+        selectedSubjects: [],
+        selectedProfessors: [],
+
     },
     el: "#document-container",
     mounted() {
@@ -46,6 +51,8 @@ var vm = new Vue({
                 vm.login();
             }
         });
+        this.loadSubjects();
+        this.loadProfessors();
 
         this.reloadAllSubjectTeacher();
         var x = window.location.hash,
@@ -136,7 +143,7 @@ var vm = new Vue({
             bsOffcanvas.hide();
         },
 
-        filterChange: function(event) {
+        filterChange() {
             if (this.page === "home" || this.page === "myCalendar")
                 this.refreshCalendar(this.page === "home");
             else if (this.page === "bookingList")
@@ -239,7 +246,7 @@ var vm = new Vue({
                 }
             });
         },
-        loadSubjects(id) {
+        loadSubjects() {
             $.ajax({
                 url: "SlotServlet",
                 data: {
@@ -248,26 +255,18 @@ var vm = new Vue({
                 method: "POST",
                 success: function(result) {
                     if (result.ok) {
-                        $(id).empty();
-                        let option = document.createElement("option");
-                        option.value = "";
-                        option.innerText = "Selezionare Materia";
-                        $(id).append(option);
-                        for (let subject of result.data) {
-                            let option = document.createElement("option");
-                            option.value = subject.value;
-                            option.innerText = subject.description;
-                            // option.style.color="whitesmoke";
-                            // option.style.backgroundColor="#2c2e2f";
-                            $(id).append(option);
-                        }
+                        vm.materie = result.data.map(name => {
+                            return{
+                                name:name.description
+                            }
+                        });
                     } else {
-                        vm.openError(result.error);
+                        // vm.openError(result.error);
                     }
                 }
             });
         },
-        loadTeachers(id) {
+        loadProfessors() {
             $.ajax({
                 url: "SlotServlet",
                 data: {
@@ -276,26 +275,25 @@ var vm = new Vue({
                 method: "POST",
                 success: function(result) {
                     if (result.ok) {
-                        $(id).empty();
-                        let option = document.createElement("option");
-                        option.value = "";
-                        option.innerText = "Selezionare Insegnante";
-                        $(id).append(option);
-                        for (let subject of result.data) {
-                            let option = document.createElement("option");
-                            option.value = subject.value;
-                            option.innerText = subject.description;
-                            $(id).append(option);
-                            // option.style.color="whitesmoke";
-                            // option.style.backgroundColor="#2c2e2f";
-                        }
-
+                        vm.professori = result.data.map(name => {
+                            return{
+                                name:name.description
+                            }
+                        });
                     } else {
-                        vm.openError(result.error);
+                        // vm.openError(result.error);
                     }
                 }
             });
         },
+        /*changeSubjects(index) {
+            this.filterChange();
+        },
+        changeProfessors(index) {
+            this.$delete(this.professori, index);
+            this.filterChange();
+        },*/
+
         loadUsers() {
             $.ajax({
                 url: "BookingServlet",
@@ -431,9 +429,9 @@ var vm = new Vue({
             this.loadSubjects("#subjectDDL");
             this.loadSubjects("#subjectDDLList");
             this.loadSubjects("#subjectTeachingDDL");
-            this.loadTeachers("#teacherDDL");
-            this.loadTeachers("#teacherDDLList");
-            this.loadTeachers("#teacherTeachingDDL");
+            this.loadProfessors("#teacherDDL");
+            this.loadProfessors("#teacherDDLList");
+            this.loadProfessors("#teacherTeachingDDL");
             this.loadUsers();
         },
         refreshTeacher(){
@@ -679,7 +677,8 @@ var vm = new Vue({
                 "#783216"
             ];
             var subjectsColors = [];
-            var subjects = this.getSubjects(data,null);
+            //var subjects = this.getSubjects(data,null);
+            var subjects = this.selectedSubjects;
 
             let i = 0;
             for (let subject of subjects){
@@ -715,8 +714,8 @@ var vm = new Vue({
             while(i!=21){
                 let slot = $("#slot-"+i,calendar);
                 const slotNr = i;
-
-                let slot_subjects = this.getSubjects(data,i);
+                //let slot_subjects = this.getSubjects(data,i);
+                let slot_subjects = this.getSubjects(data, i);
 
                 if (slot_subjects.length > 0) {
                     let accessibility_badge = document.createElement("div");
@@ -724,16 +723,15 @@ var vm = new Vue({
                     accessibility_badge.innerText = days[parseInt((i-1) / 4)] + ' ' + hours[(i - 1) % 4];
                     slot.append(accessibility_badge);
                 }
-
                 for(let subject of slot_subjects) {
                     let badge = document.createElement("div");
                     badge.style.backgroundColor = subjectsColors[subject];
                     // badge.style.cursor = "pointer";
-                    badge.innerText = subject;
+                    //badge.innerText = subject;
+                    badge.innerText = slot_subjects[subject];
                     badge.className = "badge";
                     badge.onclick = function(){
                         let cells = vm.getTeacherList(data,slotNr,subject);
-                        console.log(isHome);
 
                         $("#calendarModalTitle").text(subject + " il " + cells[0].WeekDate + " dalle " + vm.getHours(cells[0].StartTime) + " alle " + vm.getHours(cells[0].EndTime));
 
@@ -745,7 +743,6 @@ var vm = new Vue({
                             li.innerText = cell.TeacherName + " " + cell.TeacherSurname;
 
                             let div=document.createElement("div");
-                            console.log(isHome);
                             if(isHome) {
                                 let a = document.createElement("a");
                                 a.className = "btn btn-outline-primary";
@@ -856,6 +853,7 @@ var vm = new Vue({
             var subjects = [];
 
             for(let slot of data){
+
                 if(slot.SlotId === i || i == null){
                     let found = false;
                     for(let subject of subjects){
@@ -864,13 +862,16 @@ var vm = new Vue({
                             break;
                         }
                     }
-
-                    if(!found){
+                    if (this.selectedSubjects.indexOf(slot.SubjectName)) {
                         subjects.push(slot.SubjectName);
                     }
+
+                    /*if(!found){
+                        subjects.push(slot.SubjectName);
+                    }*/
                 }
             }
-
+            console.log(JSON.stringify(subjects));
             return subjects;
         },
         getTeacherList(data,slot,subject){
@@ -961,4 +962,4 @@ var vm = new Vue({
             }
         }
     }
-})
+});

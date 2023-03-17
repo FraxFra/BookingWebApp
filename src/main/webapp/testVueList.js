@@ -12,6 +12,7 @@ var vm = new Vue({
     },
     methods: {
         loadSubjects() {
+            console.log(this.materie);
             $.ajax({
                 url: "SlotServlet",
                 data: {
