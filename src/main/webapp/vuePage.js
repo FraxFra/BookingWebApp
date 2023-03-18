@@ -675,10 +675,11 @@ var vm = new Vue({
                 "#bc4912",
                 "#953a17",
                 "#783216"
-            ];
+            ]
+            return colors;
             var subjectsColors = [];
-            //var subjects = this.getSubjects(data,null);
-            var subjects = this.selectedSubjects;
+            var subjects = this.getSubjects(data,null);
+            // var subjects = this.selectedSubjects;
 
             let i = 0;
             for (let subject of subjects){
@@ -723,7 +724,9 @@ var vm = new Vue({
                     accessibility_badge.innerText = days[parseInt((i-1) / 4)] + ' ' + hours[(i - 1) % 4];
                     slot.append(accessibility_badge);
                 }
-                for(let subject of slot_subjects) {
+
+                // for(let subject of slot_subjects) {
+                for(let subject = 0; subject < slot_subjects.length; subject++) {
                     let badge = document.createElement("div");
                     badge.style.backgroundColor = subjectsColors[subject];
                     // badge.style.cursor = "pointer";
@@ -731,7 +734,8 @@ var vm = new Vue({
                     badge.innerText = slot_subjects[subject];
                     badge.className = "badge";
                     badge.onclick = function(){
-                        let cells = vm.getTeacherList(data,slotNr,subject);
+                        // let cells = vm.getTeacherList(data,slotNr,subject);
+                        let cells = vm.getTeacherList(data,slotNr,slot_subjects[subject]);
 
                         $("#calendarModalTitle").text(subject + " il " + cells[0].WeekDate + " dalle " + vm.getHours(cells[0].StartTime) + " alle " + vm.getHours(cells[0].EndTime));
 
@@ -852,8 +856,7 @@ var vm = new Vue({
         getSubjects(data,i){
             var subjects = [];
 
-            for(let slot of data){
-
+            /*for(let slot of data){
                 if(slot.SlotId === i || i == null){
                     let found = false;
                     for(let subject of subjects){
@@ -866,12 +869,17 @@ var vm = new Vue({
                         subjects.push(slot.SubjectName);
                     }
 
-                    /*if(!found){
+                    if(!found){
                         subjects.push(slot.SubjectName);
-                    }*/
+                    }
+                }
+            }*/
+            if (this.selectedSubjects.length > 0) {
+                for(let sub = 0; sub < this.selectedSubjects.length; sub++)
+                {
+                    subjects.push(this.selectedSubjects[sub]);
                 }
             }
-            console.log(JSON.stringify(subjects));
             return subjects;
         },
         getTeacherList(data,slot,subject){

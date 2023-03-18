@@ -177,14 +177,14 @@
                     <!--<select v-on:change="filterChange" id="subjectDDL" class="form-select filter" aria-label="Default select example" </select>>-->
                     <h2>Materie</h2>
                     <div v-for="materia in materie" :key="materia.description">
-                        <input type="checkbox" :id="materia.description" :value="materia" v-model="selectedSubjects" @change="filterChange">
+                        <input type="checkbox" :id="materia.description" :value="materia.name" v-model="selectedSubjects" @change="filterChange">
                         <label :for="materia.description">{{ materia.name }}</label>
                     </div>
                     <br>
                     <!--<select v-on:change="filterChange" id="teacherDDL" class="form-select filter" aria-label="Default select example"></select>-->
                     <h2>Professori</h2>
                     <div v-for="professore in professori" :key="professore.description">
-                        <input type="checkbox" :id="professore.description" :value="professore" v-model="selectedProfessors" @change="filterChange">
+                        <input type="checkbox" :id="professore.description" :value="professore.name" v-model="selectedProfessors" @change="filterChange">
                         <label :for="professore.description">{{ professore.name }}</label>
                     </div>
                 </div>
