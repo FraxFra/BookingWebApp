@@ -362,7 +362,7 @@ var vm = new Vue({
                             tr.appendChild(vm.createTd(vm.getHours(booking.SlotStart) + ' - ' + vm.getHours(booking.SlotEnd)));
                             tr.appendChild(vm.createTd(booking.Subject));
                             tr.appendChild(vm.createTd(booking.Teacher));
-                            if (role == "true") tr.appendChild(vm.createTd(booking.UserId));
+                            /*if (role == "true") */tr.appendChild(vm.createTd(booking.UserId));
                             tr.appendChild(vm.createTdStatus(booking.BookingStatus));
                             // tr.appendChild(createTd(booking.BookingStatus));
                             let td = document.createElement("td");
@@ -386,7 +386,7 @@ var vm = new Vue({
                                     });
                                 }));
                             }
-                            if (booking.BookingStatus === "Attiva" && role === "false") {
+                            if (booking.BookingStatus === "Attiva" /*&& role === "false"*/) {
                                 let button = document.createElement("button");
                                 button.className = "btn btn-primary btn-custom";
 
