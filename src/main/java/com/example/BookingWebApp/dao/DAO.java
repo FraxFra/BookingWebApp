@@ -112,10 +112,10 @@ public class DAO {
             }
 
             ResultSet rs = getPreparedStatement(conn1, Query.getAvailableBookings, new Object[]{
-                    subjectName,
-                    subjectName,
-                    teacherId,
-                    teacherId
+//                    subjectName,
+//                    subjectName,
+//                    teacherId,
+//                    teacherId
             }).executeQuery();
             while (rs.next()) {
                 Slot p = new Slot(rs.getString("TeacherName"),

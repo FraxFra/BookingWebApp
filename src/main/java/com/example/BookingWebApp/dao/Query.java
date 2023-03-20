@@ -2,9 +2,9 @@ package com.example.BookingWebApp.dao;
 
 public class Query {
     public static final String getAvailableBookings = "SELECT *\n" +
-            "  FROM availablebooking\n" +
+            "  FROM availablebooking\n"/* +
             " WHERE (SubjectName = ? or ? ='')\n" +
-            "   AND (TeacherId = ? or ? ='')";
+            "   AND (TeacherId = ? or ? ='')"*/;
 
     public static final String newBooking = "INSERT INTO Booking(SlotId,TeachingId,UserId,BookingStatus)\n" +
             "SELECT ?,\n" +

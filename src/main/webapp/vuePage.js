@@ -874,12 +874,33 @@ var vm = new Vue({
                     }
                 }
             }*/
-            if (this.selectedSubjects.length > 0) {
-                for(let sub = 0; sub < this.selectedSubjects.length; sub++)
-                {
-                    subjects.push(this.selectedSubjects[sub]);
+
+
+            for(let k = 0; k < this.selectedSubjects.length; k++)
+            {
+                for(let slot of data) {
+
+                    if (slot.SlotId == i && slot.SubjectName == this.selectedSubjects[k] && !subjects.includes(this.selectedSubjects[k])) {
+                        subjects.push(this.selectedSubjects[k]);
+                        console.log(slot.SlotId + "  Materia: " + slot.SubjectName + "  "+JSON.stringify(subjects));
+                        break;
+                    }
                 }
             }
+
+            // for(let slot of data)
+            // {
+            // if (this.selectedSubjects.length > 0) {
+            //     for(let sub = 0; sub < this.selectedSubjects.length; sub++) {
+            //         for (let slot of data) {
+            //             console.log(slot.SlotId + "materia " + slot.SubjectName);
+            //             if (slot.SlotId == i && slot.SubjectName == this.selectedSubjects[sub]) {
+            //                 subjects.push(this.selectedSubjects[sub]);
+            //                 break;
+            //             }
+            //         }
+            //     }
+            // }
             return subjects;
         },
         getTeacherList(data,slot,subject){
