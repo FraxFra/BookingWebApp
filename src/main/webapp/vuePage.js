@@ -952,6 +952,43 @@ var vm = new Vue({
                 }
             });
         },
+        newTeacher (){
+        $.ajax({
+         url:"TeacherServlet",
+         data:{
+             operation:"addTeacher",
+             name: $("#teacherName").val().trim(),
+             surname:$("#teacherSurname").val().trim()
+         },
+         method:"POST",
+         success: function (result){
+             if(result.ok){
+                 vm.refreshTeacher();
+                 vm.reloadAllSubjectTeacher();
+             }else{
+                 vm.openError(result.error);
+             }
+         }
+        })
+        },
+        newSubject(){
+        $.ajax({
+         url:"SubjectsServlet",
+         data: {
+             operation: "addSubject",
+             name: $("#subjectName").val().trim()
+         },
+         method:"POST",
+         success: function (result){
+             if(result.ok){
+                 vm.refreshSubjects();
+                 vm.reloadAllSubjectTeacher();
+             }else{
+                 vm.openError(result.error);
+             }
+         }
+        });
+        },
         login() //login function
         {
             var Username = this.username;

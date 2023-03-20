@@ -16,9 +16,9 @@
 <!--    <script src="script.js"></script>-->
     <script>
         var username = "" ;
-        console.log(username);
+        // console.log(username);
         var role = "null" ;
-        console.log(role);
+        // console.log(role);
     </script>
 </head>
 
@@ -118,7 +118,7 @@
                             <input type="text" class="form-control textInput" id="subjectName">
                         </div>
                         <br/>
-                        <button id="newSubject" type="button" class="btn btn-primary textButton" >Inserisci</button>
+                        <button @click="newSubject"id="newSubject" type="button" class="btn btn-primary textButton" >Inserisci</button>
                     </form>
                 </div>
                 <div class= "col-lg-9">
@@ -150,7 +150,7 @@
                             <input type="text" class="form-control textInput" id="teacherSurname">
                         </div>
                         <br/>
-                        <button id="newTeacher" type="button" class="btn btn-primary textButton" >Inserisci</button>
+                        <button @click="newTeacher" id="newTeacher" type="button" class="btn btn-primary textButton" >Inserisci</button>
                     </form>
                 </div>
                 <div class= "col-lg-9">
