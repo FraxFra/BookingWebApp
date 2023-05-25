@@ -7,7 +7,6 @@ import javax.servlet.annotation.*;
 
 import com.example.BookingWebApp.dao.DAO;
 import com.example.BookingWebApp.dao.Result;
-import com.example.BookingWebApp.dao.data.Slot;
 import com.example.BookingWebApp.permissions.PermissionManager;
 import com.google.gson.Gson;
 
@@ -49,7 +48,7 @@ public class SlotServlet extends HttpServlet {
                 }
                 System.out.println(subjectName);
                 System.out.println(teacherId);
-                jsonResult = gson.toJson(DAO.getBookings(subjectName, teacherId));
+                jsonResult = gson.toJson(DAO.getBookings());
                 System.out.println(jsonResult);
                 break;
             case "newBooking":
