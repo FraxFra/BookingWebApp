@@ -183,7 +183,7 @@ public class DAO {
         return executeUpdQuery(Query.newBooking,new Object[]{slotId, userId, teacherId, subjectId});
     }
 
-    public static Result<Long> checkSlot(String userId,String slotId) //controlla nel DB che l'utente userID abbia effettivamente prenotato ma non confermato o rifiutato la prenotazione
+    public static Result<Long> checkSlot(String userId,String slotId) //controlla nel DB se l'utente passato ha già prenotato un determinato slot
     {
         Connection conn1 = null;
         Result<Long> out = new Result<>();
@@ -571,7 +571,7 @@ public class DAO {
         return executeUpdQuery(Query.deleteSubject,new Object[]{subjectName});
     }
 
-    public static Result<Teaching> getTeachingList(String teacherId ,String subjectName) //ritorna i corsi non disabilitati
+    public static Result<Teaching> getTeachingList(String teacherId ,String subjectName) //ritorna la correlazione tra professore e corso dove i corsi e gli insegnanti non sono disabilitati
     {
         Connection conn1 = null;
         Result<Teaching> out = new Result<>();

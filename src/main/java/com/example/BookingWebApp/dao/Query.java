@@ -152,7 +152,8 @@ public class Query {
 
     public static final String enableSubject = "Update subject set Disabled=0 WHERE Name= ? ";
 
-    public static final String getTeachings= "SELECT SubjectId, t.Id, concat(a.Name,' ',a.Surname)as TeacherName, a.Id as TeacherId  \n" +
+    public static final String getTeachings =
+            "SELECT SubjectId, t.Id, concat(a.Name,' ',a.Surname)as TeacherName, a.Id as TeacherId  \n" +
             "from teaching t \n" +
             "join teacher a on t.TeacherId = a.Id \n" +
             "join subject s on t.SubjectId = s.Name\n" +
