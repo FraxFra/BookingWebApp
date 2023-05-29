@@ -14,11 +14,10 @@
     <div class="container-fluid">
         <div style="overflow: hidden; width: 50%">
             <em class="navbar-brand bookIcon" >
-                <img src="bookmark.svg"  width="30" height="30" alt="icon" >
+                <img src="images/bookmark.svg" width="30" height="30" alt="icon" >
             </em>
 
             <aside   style=" float:left;" class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" >
-
                 <div class="offcanvas-header">
                     <div></div>
                     <button  type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -28,7 +27,6 @@
                         <li class="nav-item me-1">
                             <a class="nav-link active me-1" aria-current="page" href="index.html" data-bs-dismiss="offcanvas" aria-hidden="true">Home</a>
                         </li>
-
                     </ul>
                 </div>
             </aside>
@@ -74,26 +72,14 @@
                         <input class="form-control w-100" type="date" id="inDataNascita" aria-label="Data di nascita" min="1922-01-01" max="2022-12-31">
                         <span id="inDataNascitaError" class="errorMsg"></span>
                     </div>
-<!--                    <div class="col-md-6">-->
-<!--                        <label for="inCittaNascita">-->
-<!--                            Città di nascita-->
-<!--                        </label>-->
-<!--                        <input class="form-control w-100" type="text" id="inCittaNascita" aria-label="Citta di nascita">-->
-<!--                        <span id="inCittaNascitaError" class="errorMsg"></span>-->
-<!--                    </div>-->
                 </div>
                 <div class="row">
                     <label class="w-25" id="lblEmail" for="inEmail">
                         Email
                     </label>
-<!--                    <label class="d-none" id="lblDomain" for="inDomain">-->
-<!--                        Dominio Email-->
-<!--                    </label>-->
                     <div class="input-group w-100" id="mail">
 
                         <input type="text" class="form-control" id="inEmail" aria-label="Email">
-<!--                        <span class="input-group-text">&commat;</span>-->
-<!--                        <input type="text" class="form-control" id="inDomain" data-errorspan="inEmailError" aria-label="Dominio email">-->
                     </div>
                     <span id="inEmailError" class="errorMsg w-50"></span>
                 </div>

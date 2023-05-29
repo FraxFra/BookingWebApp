@@ -1,81 +1,69 @@
 .badge
 {
-    /*background-color: var(--color-500);*/
     cursor: pointer;
 }
+
 body
 {
     background: linear-gradient(to right, var(--color-50), var(--color-100));
-
 }
-#calendar td {
-    /*border: 1px solid #36383c;*/
+
+#calendar td
+{
     height: 16vh;
     min-width: 15%;
     min-height: 100px;
     background-color: var(--color-300);
-    /*background: linear-gradient(var(--color-200), var(--color-300));*/
-    /*background-color: #E3E8F0;*/
     padding: 3px;
     text-overflow: ellipsis;
-    /*max-width: 1*/
     color: #2c2e2f;
     text-align: center;
 
 }
 
-
-#calendar td .badge{
+#calendar td .badge
+{
     text-overflow: ellipsis;
     max-width: 100%;
     white-space: nowrap;
     overflow: hidden;
 }
 
-*.badge:hover {
+*.badge:hover
+{
     transition-duration: 0.7s;
     transform: scale(1.1);
 }
 
-/*.btn-outline-primary:hover{*/
-/*    background-color: #B6E2D3 !important;*/
-/*    color: black !important;*/
-/*    border-color: #5D7772 !important;*/
-/*}*/
-
-#calendar{
+#calendar
+{
     width:90%;
     height: 40%;
     margin-left:2%;
-    /*border:2px solid #E3E8F0; #36383c;*/
     border-collapse: collapse;
     border: 0px;
 }
 
-#calendar td:hover{
-    /*border:3px solid #36383c;*/
+#calendar td:hover
+{
+
 }
 
-#calendar td:first-child:hover{
-    /*border:1px solid #36383c;*/
+#calendar td:first-child:hover
+{
+
 }
 
-#calendar td,th{
-    /*border:2px solid #E3E8F0;*/
-    /*border-right: 1px solid #555;*/
-    /*border-bottom: 1px solid #555;*/
+#calendar td,th
+{
     border: 1px solid var(--color-50);
-    /*border-radius: 10px;*/
-
     max-width: 12vw;
-
 }
 
-
-#calendar th {
+#calendar th
+{
     font-weight: bold;
     text-align: center;
-    /*border: 1px solid #36383c;*/
     height: 40px;
     background-color: var(--color-300);
     color: #2c2e2f;
@@ -84,87 +72,89 @@ body
     white-space: nowrap;
 }
 
-#calendar .hour{
+#calendar .hour
+{
     color:#2c2e2f;
     font-weight: bold;
 }
-@media screen and (max-width: 1024px) {
-    #calendar {
+
+@media screen and (max-width: 1024px)
+{
+    #calendar
+    {
         width: 100% !important;
         margin-left:0%;
         margin-right: 0%;
         margin-top: 5%;
     }
 
-    .pc{
-        display: none;
-    }
-}
-@media  screen and (min-width: 1024px) {
-    .mobile{
+    .pc
+    {
         display: none;
     }
 }
 
-#calendar .badge{
+@media screen and (min-width: 1024px)
+{
+    .mobile
+    {
+        display: none;
+    }
+}
+
+#calendar .badge
+{
     margin:2px;
 }
 
-#calendar td:first-child {
+#calendar td:first-child
+{
     width: 140px;
     text-align: center;
 }
 
-#calendarModalList{
+#calendarModalList
+{
     border-radius: 5px !important;
 }
 
-.calendar-li{
+.calendar-li
+{
     display : flex;
     align-items : center;
     justify-content : space-between;
-    /*background-color: #2c2e2f;*/
-    /*color: whitesmoke;*/
     background: var(--color-300);
     color: black;
     border: 1px outset var(--color-200);
     border-radius: 5px;
 }
-*.calendar-li:hover{
+
+*.calendar-li:hover
+{
     transition-duration: 0.3s;
     transform: scale(1.01);
 }
 
-/*#calendarModalList li:not(:last-child){*/
-/*    border-bottom: 1px solid gray !important;*/
-/*}*/
-
-/*#test-slot{
-    display: inline-block;
-    background-color: red;
-    color:white;
-    width: 100%;
-    height: 100%;
-    border:1px solid red;
-    border-radius: 10%;
-}*/
-.form-select{
+.form-select
+{
     background-color: var(--color-300);
     color: black;
     cursor: pointer;
 }
 
-.form-select option{
+.form-select option
+{
     background-color: var(--color-300) !important;
     color: black !important;
 }
 
-.table>tbody {
+.table>tbody
+{
     vertical-align: middle !important;
 }
 
-*.btn-outline-primary, *.btn-log, *.textButton{
-    /*background: linear-gradient(to right, var(--color-300), var(--color-400));*/
+*.btn-outline-primary, *.btn-log, *.textButton
+{
     color: black;
     border: 1px solid #2c2e2f;
     background: linear-gradient(to right, var(--color-400) 50%, var(--color-300) 50%);
@@ -180,16 +170,13 @@ body
     color: black;
     border: 1px solid #2c2e2f;
 }
-/**.btn-log:hover
-{
-    box-shadow: 20px 20px 50px black;
-}*/
 
 .btn, .badge, .form-select, .modal-colors
 {
     border-radius: 5px;
 }
-/*.form-select,*/ .modal-colors, .list-group
+
+.modal-colors, .list-group
 {
     color:black;
     background: var(--color-300);
@@ -200,7 +187,8 @@ body
     background: var(--color-100);
 }
 
-:root {
+:root
+{
     --color-50:  #fef8ee;
     --color-100: #feeed6;
     --color-200: #fbd9ad;

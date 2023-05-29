@@ -1,27 +1,28 @@
-html{
+html
+{
     height: 100%;
 }
 
-body{
-    /*background-color: #1f2125;*/
+body
+{
     background: linear-gradient(to right, var(--color-50), var(--color-100));
     max-width: 100% !important;
     min-height: 100vh;
     height: 100%;
     align-items: center;
-    /*color: whitesmoke;*/
     padding: 0 !important;
     margin: 0;
 }
 
-#navbar{
-    /*position: fixed;*/
+#navbar
+{
     top: 0;
     width: 100%;
     overflow: hidden;
 }
 
-.signup-container{
+.signup-container
+{
     height: 80%;
     background: linear-gradient( var(--color-100), var(--color-200)) !important;
     border: 1px solid var(--color-300)  !important;
@@ -32,52 +33,62 @@ body{
     margin-top: 20px;
 }
 
-@media screen and (max-width: 750px){
-    .signup-container.w{
+@media screen and (max-width: 750px)
+{
+    .signup-container.w
+    {
         width: 90%;
     }
 
-    .inner-w{
+    .inner-w
+    {
         min-width: 99%;
         max-width: 99%;
     }
 }
 
-@media screen and (min-width: 750px){
-    .signup-container.w{
+@media screen and (min-width: 750px)
+{
+    .signup-container.w
+    {
         width: 80%;
     }
 
-    .inner-w{
+    .inner-w
+    {
         min-width: 90%;
         max-width: 90%;
     }
 }
 
-@media screen and (min-width: 1000px){
-    .signup-container.w{
+@media screen and (min-width: 1000px)
+{
+    .signup-container.w
+    {
         width: 60%;
     }
 
-    .inner-w{
+    .inner-w
+    {
         min-width: 80%;
         max-width: 80%;
     }
 }
 
-
-
-form{
+form
+{
     padding: 10px;
     width: 100%;
     margin-top:20px;
 }
 
-nav em, nav aside{
+nav em, nav aside
+{
     float: left;
 }
 
-.navbar-brand{
+.navbar-brand
+{
     margin-left: 5px;
 }
 
@@ -100,12 +111,13 @@ nav em, nav aside{
     transform: scale(1.03);
 }
 
-input {
-    /*margin-left: 10px;*/
+input
+{
     width: 100%;
 }
 
-#at{
+#at
+{
     margin-left: 10px;
     margin-right: 10px;
 }
@@ -114,24 +126,18 @@ form .row{
     margin-top: 10px;
 }
 
-/*#mail{*/
-/*    margin-left: 5px;*/
-/*    padding: 7px;*/
-/*}*/
-
-#username{
+#username
+{
     padding: 0px 12px;
-
 }
 
-*.btn-outline-primary, *.btn-log, *.textButton{
-    /*background: linear-gradient(to right, var(--color-300), var(--color-400));*/
+*.btn-outline-primary, *.btn-log, *.textButton
+{
     color: black!important;
     border: 1px solid #2c2e2f;
     background: linear-gradient(to right, var(--color-400) 50%, var(--color-300) 50%);
     background-size: 200% 100%;
     background-position:right bottom;
-    /*margin-left:10px;*/
     transition:all 0.7s ease;
     border-radius: 5px;
 }
@@ -148,50 +154,51 @@ form .row{
     border: 1px solid #2c2e2f;
 }
 
-/*.btn-log{*/
-/*    border-color:#5D7772 !important;*/
-/*    background-color: #B6E2D3 !important;*/
-/*    color: black !important;*/
-/*}*/
-
-h1{
+h1
+{
     text-align: center;
 }
 
-.errorMsg{
+.errorMsg
+{
     color: red;
 }
 
-.inputError{
+.inputError
+{
     border-width: 3px;
 }
 
-@media (min-width: 768px){
-    .col-md-6 {
+@media (min-width: 768px)
+{
+    .col-md-6
+    {
         flex: 0 0 auto;
         width: 100%;
     }
 }
 
-.thx{
-margin: 80px 0;
-text-align: center;
+.thx
+{
+    margin: 80px 0;
+    text-align: center;
 }
 
-:root {
---color-50:  #fef8ee;
---color-100: #feeed6;
---color-200: #fbd9ad;
---color-300: #f8be79;
---color-400: #f59e4d;
---color-500: #f17b1e;
---color-600: #e26114;
---color-700: #bc4912;
---color-800: #953a17;
---color-900: #783216;
+:root
+{
+    --color-50:  #fef8ee;
+    --color-100: #feeed6;
+    --color-200: #fbd9ad;
+    --color-300: #f8be79;
+    --color-400: #f59e4d;
+    --color-500: #f17b1e;
+    --color-600: #e26114;
+    --color-700: #bc4912;
+    --color-800: #953a17;
+    --color-900: #783216;
 }
 
 ::selection
 {
-background: var(--color-400);
+    background: var(--color-400);
 }

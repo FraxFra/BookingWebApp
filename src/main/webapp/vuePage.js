@@ -1,12 +1,8 @@
 var vm = new Vue({
     data: {
         page: "home",
-        // isLogged: role !== "null",
         isLogged: false,
-        // isAdminLogged: this.isAdmin,
-        // isLogged: this.username !== "",
         username: this.username,
-        // isAdmin: role === "null",
         isAdmin: false,
         confirmModal: null,
         errorModal: null,
@@ -17,11 +13,11 @@ var vm = new Vue({
         professori: [],
         selectedSubjects: [],
         selectedProfessors: [],
-
     },
+
     el: "#document-container",
-    mounted() {
-        document.getElementById('exampleModalToggle').addEventListener('shown.bs.modal', function () {
+    mounted() { //inizializzazione della pagina (retrive dai cookies e setup dei modal ovvero dei mesaggi / finestre pop up)
+        document.getElementById('exampleModalToggle').addEventListener('shown.bs.modal', function() {
             document.getElementById("loginUsername").focus()
         });
         this.myModal = new bootstrap.Modal(document.getElementById('calendarModal'));
@@ -29,18 +25,9 @@ var vm = new Vue({
         this.errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
         this.loginModal = new bootstrap.Modal(document.getElementById('exampleModalToggle'));
         this.teachingModal = new bootstrap.Modal(document.getElementById('TeachingModal'));
-        // this.setCookie("username", "")
-        // document.cookie = "username=";
-        // console.log("COOKIES: " + document.getElementById("cookies"));
-        // this.username = document.cookie;
         this.username = this.getCookie("username");
-        // this.role = false;
         this.isAdmin = this.getCookie("isAdmin");
-        // if (this.isLogged == false)
-        // {
-        //     this.username = "";
-        // }
-        // this.username = "";
+
         console.log("Username: " + this.username);
         if (this.username) {
             this.isLogged = true;
@@ -50,22 +37,25 @@ var vm = new Vue({
         console.log("IsAdmin: " + this.isAdmin + " isLogged" + this.isLogged);
 
         $("#loginPassword").on("keypress", function(event) {
-            if (event.which == 13) {
+            if (event.which === 13) { //quando si preme invio
                 vm.login();
             }
         });
+
         $("#teacherName").on("keypress", function(event) {
-            if (event.which == 13) {
+            if (event.which === 13) {
                 vm.newTeacher();
             }
         });
+
         $("#teacherSurname").on("keypress", function(event) {
-            if (event.which == 13) {
+            if (event.which === 13) {
                 vm.newTeacher();
             }
         });
+
         $("#subjectName").on("keypress", function(event) {
-            if (event.which == 13) {
+            if (event.which === 13) {
                 vm.newSubject();
             }
         });
@@ -79,6 +69,7 @@ var vm = new Vue({
             x = params[0];
             y = params[1];
         }
+
         if (!x) {
             x = "home";
         }
@@ -100,21 +91,16 @@ var vm = new Vue({
     },
 
     watch: {
-        username: function(val) {
+        username: function(val) { //metodo automatico per memorizzare il nuovo username nei cookies
             this.username = val;
             if (this.username !== document.cookie) {
                 this.setCookie("username", this.username);
-                // document.cookie = "username=" + this.username;
             }
-            // console.log("username   " + this.username+"\n islogged   " + this.isLogged);
-            // console.log("Valore " + document.cookie + "   " + this.username);
-            // console.log("COOKIES: " + document.getElementById("cookies"));
-
         }
     },
 
     methods: {
-        refreshPage: function(page) //switch between pages by the anchor page and refresh the page selected
+        refreshPage: function(page) //switch tra le pagine dell'index
         {
             this.page = page;
             window.location.hash = page; //set anchor (#...)
@@ -141,7 +127,7 @@ var vm = new Vue({
             }
         },
 
-        showAndHidePages: function(page) //hide every element except the page selected
+        showAndHidePages: function(page) //nasconde gli elementi di altre pagine ad eccezione della pagina selezionata
         {
             switch (page) {
                 case "home":
@@ -172,8 +158,8 @@ var vm = new Vue({
                 this.refreshCalendar(this.page === "home");
             else if (this.page === "bookingList")
                 this.refreshList();
-
         },
+
         logout() {
             $.ajax({
                 url: "PageServlet",
@@ -182,24 +168,14 @@ var vm = new Vue({
                 },
                 method: "POST",
                 success: function(result) {
-                    // this.username = "";
                     vm.setCookie("username", "");
                     vm.isAdmin = false;
                     vm.isLogged = false;
                     vm.setCookie("isAdmin", false);
-                    // console.log("TEST" + JSON.stringify(result));
-                    // this.setCookie(this.username);
-                    // document.cookie = "";
-                    // this.isLogged = false;
-                    // console.log(document.cookie + " username " + this.username);
-                    // document.cookie = "";
-                    // this.isLogged = false;
-                    // document.cookie = "username=";
-                    // console.log("COOKIES: " + document.getElementById("cookies"));
+
                     if (result.ok) {
                         window.location.hash = "";
                         window.location.href = "index.html";
-                        // window.location.href = "index.jsp";
                         $("#weather-temp").html("<strong>" + "Sloggato " + JSON.stringify(result) + "</strong>");
                     } else {
                         $("#weather-temp").html("Errore: " + result.error);
@@ -207,40 +183,38 @@ var vm = new Vue({
                 }
             });
         },
-        setCookie(cname, cvalue /*, exdays*/ ) {
-            /*const d = new Date();
-            d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-            let expires = "expires="+d.toUTCString();*/
-            document.cookie = cname + "=" + cvalue /*+ ";" + expires + ";path=/"*/ ;
+
+        setCookie(cname, cvalue) {
+            document.cookie = cname + "=" + cvalue;
         },
+
         getCookie(cname) {
             let name = cname + "=";
             let ca = document.cookie.split(';');
             for (let i = 0; i < ca.length; i++) {
                 let c = ca[i];
-                while (c.charAt(0) == ' ') {
+                while (c.charAt(0) === ' ') {
                     c = c.substring(1);
                 }
-                if (c.indexOf(name) == 0) {
+                if (c.indexOf(name) === 0) {
                     return c.substring(name.length, c.length);
                 }
             }
             return "";
         },
-        refreshCalendar(isHome) {
-            // var subject = $("#subjectDDL").val().trim();
+
+        refreshCalendar(isHome) { //refresh del calendario in base ai filtri della materia
             let subject = document.getElementById("#subjectDDL");
-            // var teacher = $("#teacherDDL").val().trim();
             let teacher = document.getElementById("#teacherDDL");
-            // console.log(subject);
-            if (subject == "") {
+
+            if (subject === "") {
                 subject = null;
             }
-            if (teacher == "") {
+            if (teacher === "") {
                 teacher = null;
             }
-            $.ajax({
 
+            $.ajax({
                 url: "SlotServlet",
                 data: {
                     SubjectName: subject,
@@ -257,6 +231,7 @@ var vm = new Vue({
                 }
             });
         },
+
         myCalendar() {
             $.ajax({
                 url: "SlotServlet",
@@ -273,6 +248,7 @@ var vm = new Vue({
                 }
             });
         },
+
         loadSubjects() {
             $.ajax({
                 url: "SlotServlet",
@@ -283,16 +259,15 @@ var vm = new Vue({
                 success: function(result) {
                     if (result.ok) {
                         vm.materie = result.data.map(name => {
-                            return{
-                                name:name.description
+                            return {
+                                name: name.description
                             }
                         });
-                    } else {
-                        // vm.openError(result.error);
                     }
                 }
             });
         },
+
         loadProfessors() {
             $.ajax({
                 url: "SlotServlet",
@@ -303,24 +278,15 @@ var vm = new Vue({
                 success: function(result) {
                     if (result.ok) {
                         vm.professori = result.data.map(name => {
-                            return{
+                            return {
                                 id: name.value,
-                                name:name.description
+                                name: name.description
                             }
                         });
-                    } else {
-                        // vm.openError(result.error);
                     }
                 }
             });
         },
-        /*changeSubjects(index) {
-            this.filterChange();
-        },
-        changeProfessors(index) {
-            this.$delete(this.professori, index);
-            this.filterChange();
-        },*/
 
         loadUsers() {
             $.ajax({
@@ -341,51 +307,22 @@ var vm = new Vue({
                             option.value = subject.value;
                             option.innerText = subject.description;
                             $("#userDDLList").append(option);
-                            // option.style.color="whitesmoke";
-                            // option.style.backgroundColor="#2c2e2f";
                         }
-
                     } else {
                         vm.openError(result.error);
                     }
                 }
             });
         },
-        refreshList() {
-            // var subject = $("#subjectDDLList").val();
-            // var teacher = $("#teacherDDLList").val();
-            // var user = $("#userDDLList").val();
+
+        refreshList() { //esegue un refresh sulla lista delle proprie ripetizioni prenotate e crea funzionalmente i cottoni per confermarle o disdirle
             let subject = this.selectedSubjects;
             let teacher = this.selectedProfessors;
             let user = this.username;
 
-            // if (this.selectedSubjects == [])
-            // {
-            //     subject = this.materie;
-            // }
-            //
-            // if (this.selectedProfessors == [])
-            // {
-            //     teacher = this.professori;
-            // }
-
-            // console.log(JSON.stringify(this.selectedSubjects) + "     " + JSON.stringify(teacher));
-
-            // if (subject == "") {
-            //     subject = null;
-            // }
-            // if (teacher == "") {
-            //     teacher = null;
-            // }
-            // if (user == "") {
-            //     user = null;
-            // }
-
             $.ajax({
                 url: "BookingServlet",
                 data: {
-                    // SubjectName: subject,
-                    // TeacherId: teacher,
                     SubjectName: vm.materie,
                     TeacherId: vm.professori,
                     UserId: user,
@@ -401,24 +338,21 @@ var vm = new Vue({
                         let tbody = document.getElementById("tabListBody");
                         tbody.innerHTML = "";
                         for (let booking of result.data) {
-                            if (booking.UserId == vm.username) {
+                            if (booking.UserId === vm.username) {
                                 if (teacher.includes(booking.Teacher) || subject.includes(booking.Subject)) {
 
                                     let tr = document.createElement("tr");
 
                                     tr.appendChild(vm.createTd(idx.toString()));
-                                    // tr.appendChild(vm.createTd(i.toString()));
                                     tr.appendChild(vm.createTd(booking.SlotDate));
                                     tr.appendChild(vm.createTd(vm.getHours(booking.SlotStart) + ' - ' + vm.getHours(booking.SlotEnd)));
                                     tr.appendChild(vm.createTd(booking.Subject));
                                     tr.appendChild(vm.createTd(booking.Teacher));
-                                    /*if (role == "true") */
                                     tr.appendChild(vm.createTd(booking.UserId));
                                     tr.appendChild(vm.createTdStatus(booking.BookingStatus));
-                                    // tr.appendChild(createTd(booking.BookingStatus));
                                     let td = document.createElement("td");
                                     if (booking.BookingStatus === "Attiva") {
-                                        td.appendChild(vm.createDeleteButton(function () {
+                                        td.appendChild(vm.createDeleteButton(function() {
                                             $.ajax({
                                                 url: "SlotServlet",
                                                 data: {
@@ -426,7 +360,7 @@ var vm = new Vue({
                                                     BookingId: booking.BookingId
                                                 },
                                                 method: "POST",
-                                                success: function (result) {
+                                                success: function(result) {
                                                     if (result.ok) {
                                                         vm.openError("Disdetta!", true);
                                                         vm.refreshList();
@@ -438,14 +372,14 @@ var vm = new Vue({
                                         }));
                                     }
                                     idx++;
-                                    if (booking.BookingStatus === "Attiva" /*&& role === "false"*/) {
+                                    if (booking.BookingStatus === "Attiva") {
                                         let button = document.createElement("button");
                                         button.className = "btn btn-primary btn-custom";
 
                                         let i = document.createElement("i");
                                         i.className = "bi bi-check-circle icon-custom";
 
-                                        button.onclick = function () {
+                                        button.onclick = function() {
                                             $.ajax({
                                                 url: "SlotServlet",
                                                 data: {
@@ -453,7 +387,7 @@ var vm = new Vue({
                                                     BookingId: booking.BookingId
                                                 },
                                                 method: "POST",
-                                                success: function (result) {
+                                                success: function(result) {
                                                     if (result.ok) {
                                                         vm.openError("Completata!", true);
                                                         vm.refreshList();
@@ -478,7 +412,8 @@ var vm = new Vue({
                 }
             });
         },
-        reloadAllSubjectTeacher(){
+
+        reloadAllSubjectTeacher() {
             this.loadSubjects("#subjectDDL");
             this.loadSubjects("#subjectDDLList");
             this.loadSubjects("#subjectTeachingDDL");
@@ -487,59 +422,57 @@ var vm = new Vue({
             this.loadProfessors("#teacherTeachingDDL");
             this.loadUsers();
         },
-        refreshTeacher(){
-            $.ajax(
-            {
+
+        refreshTeacher() { //esegue un refresh sulla lista dei docenti e crea un bottone per eliminarli
+            $.ajax({
                 url: "TeacherServlet",
                 data: {
                     operation: "getTeacherList"
                 },
                 method: "POST",
-                success: function (result) {
+                success: function(result) {
                     if (result.ok) {
                         let tbody = document.getElementById("tabTeacherBody");
-                        let i= 1;
+                        let i = 1;
                         tbody.innerHTML = "";
-                        for(let teacher of result.data){
+                        for (let teacher of result.data) {
                             let tr = document.createElement("tr");
-                            let editButton=document.createElement("button");
-                            let editI=document.createElement("i");
+                            let editButton = document.createElement("button");
+                            let editI = document.createElement("i");
                             tr.appendChild(vm.createTd(i.toString()));
                             tr.appendChild(vm.createTd(teacher.Name));
                             tr.appendChild(vm.createTd(teacher.Surname));
 
-                            editButton.className="btn btn-primary btn-custom";
-
+                            editButton.className = "btn btn-primary btn-custom";
                             editI.className = "bi bi-pencil-square icon-custom";
 
                             editButton.appendChild(editI);
-                            editButton.onclick=function () {
-                                vm.refreshTeaching(teacher.Id,null,teacher.Name+ " "+teacher.Surname);
+                            editButton.onclick = function() {
+                                vm.refreshTeaching(teacher.Id, null, teacher.Name + " " + teacher.Surname);
                             };
 
-                            let td=document.createElement("td");
+                            let td = document.createElement("td");
                             td.appendChild(editButton);
-                            td.appendChild(vm.createDeleteButton(function () {
-                                vm.openConfirm("Vuoi davvero eliminare il docente "+teacher.Name+" "+teacher.Surname+ " ?",
-                                    function (){
-                                        $.ajax(
-                                            {
-                                                url: "TeacherServlet",
-                                                data: {
-                                                    Id: teacher.Id,
-                                                    operation: "deleteTeacher"
-                                                },
-                                                method: "POST",
-                                                success: function (result) {
-                                                    if (result.ok) {
-                                                        vm.confirmModal.hide();
-                                                        vm.refreshTeacher();
-                                                        vm.reloadAllSubjectTeacher();
-                                                    }else{
-                                                        vm.openError(result.error);
-                                                    }
+                            td.appendChild(vm.createDeleteButton(function() {
+                                vm.openConfirm("Vuoi davvero eliminare il docente " + teacher.Name + " " + teacher.Surname + " ?",
+                                    function() {
+                                        $.ajax({
+                                            url: "TeacherServlet",
+                                            data: {
+                                                Id: teacher.Id,
+                                                operation: "deleteTeacher"
+                                            },
+                                            method: "POST",
+                                            success: function(result) {
+                                                if (result.ok) {
+                                                    vm.confirmModal.hide();
+                                                    vm.refreshTeacher();
+                                                    vm.reloadAllSubjectTeacher();
+                                                } else {
+                                                    vm.openError(result.error);
                                                 }
-                                            });
+                                            }
+                                        });
                                     })
                             }));
                             tr.appendChild(td);
@@ -552,39 +485,39 @@ var vm = new Vue({
                 }
             });
         },
-        refreshSubjects(){
-            $.ajax(
-            {
+
+        refreshSubjects() { //crea la lista di materie e crea un bottone per disabilitarle
+            $.ajax({
                 url: "SubjectsServlet",
                 data: {
                     operation: "getSubjectsList"
                 },
                 method: "POST",
-                success: function (result) {
+                success: function(result) {
                     if (result.ok) {
                         let tbody = document.getElementById("tabSubjectsBody");
-                        let i= 1;
+                        let i = 1;
                         tbody.innerHTML = "";
-                        for(let subject of result.data){
+                        for (let subject of result.data) {
                             let tr = document.createElement("tr");
-                            let detailButton=document.createElement("button");
-                            let detailI=document.createElement("i");
+                            let detailButton = document.createElement("button");
+                            let detailI = document.createElement("i");
                             tr.appendChild(vm.createTd(i.toString()));
                             tr.appendChild(vm.createTd(subject.Name));
 
-                            detailButton.className="btn btn-primary btn-custom";
+                            detailButton.className = "btn btn-primary btn-custom";
 
                             detailI.className = "bi bi-info-square icon-custom";
 
                             detailButton.appendChild(detailI);
-                            detailButton.onclick=function () {
-                                vm.refreshTeaching(null,subject.Name);
+                            detailButton.onclick = function() {
+                                vm.refreshTeaching(null, subject.Name);
                             };
 
-                            let td=document.createElement("td");
+                            let td = document.createElement("td");
                             td.appendChild(detailButton);
-                            td.appendChild(vm.createDeleteButton(function () {
-                                vm.openConfirm("Vuoi davvero eliminare il corso "+ subject.Name + "  ?", vm.deleteSubject,subject)
+                            td.appendChild(vm.createDeleteButton(function() {
+                                vm.openConfirm("Vuoi davvero eliminare il corso " + subject.Name + "  ?", vm.deleteSubject, subject)
                             }));
                             tr.appendChild(td);
                             tbody.appendChild(tr);
@@ -596,17 +529,17 @@ var vm = new Vue({
                 }
             });
         },
-        refreshTeaching(teacherId,subject,teacherName=null){
-            $.ajax(
-            {
+
+        refreshTeaching(teacherId, subject, teacherName = null) { //carica la lista di insegnamenti (correlazione tra insegnante e corso) e crea un tasto per disabilitarli
+            $.ajax({
                 url: "TeachingServlet",
                 data: {
                     operation: "getTeachingList",
-                    teacher:teacherId,
-                    subject:subject
+                    teacher: teacherId,
+                    subject: subject
                 },
                 method: "POST",
-                success: function (result) {
+                success: function(result) {
                     if (result.ok) {
                         let ul = document.getElementById("teachingModalList");
                         ul.innerHTML = "";
@@ -616,41 +549,31 @@ var vm = new Vue({
 
                         console.log(JSON.stringify(vm.professori));
 
-                        if(teacherId != null) {
-                            // document.getElementById("subjectTeachingDDL").style.display = "block";
-                            // document.getElementById("teacherTeachingDDL").style.display = "none";
+                        if (teacherId != null) {
                             document.getElementById("teacherChoose").style.display = "none";
-                            document.getElementById("newTeaching").onclick= function(){
-                                // vm.newTeaching(teacherId,$("#subjectTeachingDDL").val(),false,teacherName);
-                                vm.newTeaching(teacherId,$("#subjectChoose").val(),false,teacherName);
+                            document.getElementById("newTeaching").onclick = function() {
+                                vm.newTeaching(teacherId, $("#subjectChoose").val(), false, teacherName);
                             };
 
-                        }else{
-                            // document.getElementById("subjectTeachingDDL").style.display="none";
-                            // document.getElementById("teacherTeachingDDL").style.display="block";
-                            document.getElementById("teacherChoose").style.display="block";
-                            document.getElementById("subjectChoose").style.display="none";
-                            document.getElementById("newTeaching").onclick= function(){
-                                // vm.newTeaching($("#teacherTeachingDDL").val(),subject,true);
-                                // vm.newTeaching($("#teacherChoose").val(),subject,true);
-                                // console.log("AAAAA" + "aa" + $("#teacherChoose").val() + "    " + JSON.stringify(vm.professori.indexOf($("#teacherChoose").val())));
-                                vm.newTeaching(vm.professori[vm.professori.findIndex(n => n.name === $("#teacherChoose").val())].id,subject,true);
+                        } else {
+                            document.getElementById("teacherChoose").style.display = "block";
+                            document.getElementById("subjectChoose").style.display = "none";
+                            document.getElementById("newTeaching").onclick = function() {
+                                vm.newTeaching(vm.professori[vm.professori.findIndex(n => n.name === $("#teacherChoose").val())].id, subject, true);
                             };
                         }
 
-                        for(let teaching of result.data){
+                        for (let teaching of result.data) {
                             let li = document.createElement("li");
                             li.className = "list-group-item list-li";
-                            li.innerText = teacherId==null? teaching.teacherName :teaching.subjectName;
+                            li.innerText = teacherId == null ? teaching.teacherName : teaching.subjectName;
 
                             let a = document.createElement("a");
                             a.className = "btn btn-outline-primary";
                             a.href = "#";
                             a.innerText = "Elimina";
-                            // a.style.borderColor = "#5D7772";
-                            // a.style.color = "whitesmoke";
 
-                            a.onclick = function () {
+                            a.onclick = function() {
                                 vm.openConfirm("Si conferma di voler eliminare " + teaching.subjectName + " dai corsi di " + teaching.teacherName + "?",
                                     vm.deleteTeaching, teaching, teacherId, subject);
                             }
@@ -658,18 +581,14 @@ var vm = new Vue({
                             li.appendChild(a);
                             ul.appendChild(li);
 
-                            if(teacherId != null){
-
-                                $("#subjectChoose option[value='"+teaching.subjectName+"'  ]").hide();
-                                // $("#subjectTeachingDDL option[value='"+teaching.subjectName+"'  ]").hide();
-                            }else{
-
-                                // $("#teacherTeachingDDL option[value="+teaching.TeacherId+"]").hide();
-                                $("#teacherChoose option[value="+teaching.TeacherId+"]").hide();
+                            if (teacherId != null) {
+                                $("#subjectChoose option[value='" + teaching.subjectName + "'  ]").hide();
+                            } else {
+                                $("#teacherChoose option[value=" + teaching.TeacherId + "]").hide();
                             }
                         }
-                        $("#teachingModalLabel").text(teacherId==null? "Docenti di "+ subject:"Corsi di "+ teacherName);
-                        if(!$('#TeachingModal').is(':visible')) {
+                        $("#teachingModalLabel").text(teacherId == null ? "Docenti di " + subject : "Corsi di " + teacherName);
+                        if (!$('#TeachingModal').is(':visible')) {
                             vm.teachingModal.toggle();
                         }
                     } else {
@@ -678,60 +597,59 @@ var vm = new Vue({
                 }
             });
         },
+
         createTd(innerText) {
             let td = document.createElement("td");
             td.innerText = innerText;
             return td;
         },
-        openConfirm(text,fn,...args){
+
+        openConfirm(text, fn, ...args) {
             $("#confirmText").text(text);
-            document.getElementById("ConfirmButton").onclick=function(){
+            document.getElementById("ConfirmButton").onclick = function() {
                 console.log(args);
-                fn.apply(this,args);
+                fn.apply(this, args);
             };
             vm.confirmModal.toggle();
         },
-        openError(text, isInfo = false){
+
+        openError(text, isInfo = false) {
             $("#errorText").text(text);
-            $("#errorModalLabel").text(isInfo? "Operazione completata" : "Errore");
+            $("#errorModalLabel").text(isInfo ? "Operazione completata" : "Errore");
             vm.errorModal.toggle();
         },
-        createTdStatus(innerText)
-        {
+
+        createTdStatus(innerText) {
             let status = document.createElement("td");
             let statusIcon = document.createElement("img");
-            if (innerText == "Attiva")
-            {
-                statusIcon.src = "book-open.svg";
+            if (innerText === "Attiva") {
+                statusIcon.src = "images/book-open.svg";
                 statusIcon.title = "Attiva";
-            }
-            else if(innerText == "Disdetta")
-            {
-                statusIcon.src = "x.svg";
+            } else if (innerText === "Disdetta") {
+                statusIcon.src = "images/x.svg";
                 statusIcon.title = "Disdetta";
-            }
-            else
-            {
-                statusIcon.src = "check-circle.svg";
+            } else {
+                statusIcon.src = "images/check-circle.svg";
                 statusIcon.title = "Effettuata";
             }
-            // status.align = "center";
             status.appendChild(statusIcon);
             return status;
         },
-        createDeleteButton(fn){
-            let deleteButton=document.createElement("button");
-            let deleteI=document.createElement("i");
-            deleteButton.className="btn btn-primary btn-custom";
 
-            deleteI.className="bi bi-trash3 icon-custom";
+        createDeleteButton(fn) {
+            let deleteButton = document.createElement("button");
+            let deleteI = document.createElement("i");
+            deleteButton.className = "btn btn-primary btn-custom";
+
+            deleteI.className = "bi bi-trash3 icon-custom";
 
             deleteButton.appendChild(deleteI);
 
-            deleteButton.onclick= fn;
+            deleteButton.onclick = fn;
             return deleteButton;
         },
-        associateColors(data){
+
+        associateColors(data) {
             var colors = [
                 "#f59e4d",
                 "#f17b1e",
@@ -747,24 +665,24 @@ var vm = new Vue({
             ]
             return colors;
             var subjectsColors = [];
-            var subjects = this.getSubjects(data,null);
-            // var subjects = this.selectedSubjects;
+            var subjects = this.getSubjects(data, null);
 
             let i = 0;
-            for (let subject of subjects){
+            for (let subject of subjects) {
                 subjectsColors[subject] = colors[i % colors.length];
                 i++;
             }
             return subjectsColors;
         },
-        createCalendar(data,isHome){
+
+        createCalendar(data, isHome) {
             const calendar = $("#calendar");
 
             const subjectsColors = this.associateColors(data);
 
-            const myModal = new bootstrap.Modal(document.getElementById('calendarModal'));
+            const myModal = this.myModal;
 
-            let i=1;
+            let i = 1;
 
             const days = [
                 "Lunedi",
@@ -781,69 +699,57 @@ var vm = new Vue({
                 "dalle 18 alle 19",
             ];
 
-            while(i!=21){
-                let slot = $("#slot-"+i,calendar);
+            while (i !== 21) {
+                let slot = $("#slot-" + i, calendar);
                 const slotNr = i;
-                //let slot_subjects = this.getSubjects(data,i);
                 let slot_subjects = this.getSubjects(data, i);
 
                 if (slot_subjects.length > 0) {
                     let accessibility_badge = document.createElement("div");
                     accessibility_badge.className = "screenreader";
-                    accessibility_badge.innerText = days[parseInt((i-1) / 4)] + ' ' + hours[(i - 1) % 4];
+                    accessibility_badge.innerText = days[parseInt((i - 1) / 4)] + ' ' + hours[(i - 1) % 4];
                     slot.append(accessibility_badge);
                 }
 
-                // for(let subject of slot_subjects) {
-                for(let subject = 0; subject < slot_subjects.length; subject++) {
+                for (let subject = 0; subject < slot_subjects.length; subject++) {
                     let badge = document.createElement("div");
                     badge.style.backgroundColor = subjectsColors[subject];
-                    // badge.style.cursor = "pointer";
-                    //badge.innerText = subject;
                     badge.innerText = slot_subjects[subject];
                     badge.className = "badge";
-                    badge.onclick = function(){
-                        // let cells = vm.getTeacherList(data,slotNr,subject);
-                        let cells = vm.getTeacherList(data,slotNr,slot_subjects[subject]);
+                    badge.onclick = function() {
+                        let cells = vm.getTeacherList(data, slotNr, slot_subjects[subject]);
 
                         $("#calendarModalTitle").text(slot_subjects[subject] + " il " + cells[0].WeekDate + " dalle " + vm.getHours(cells[0].StartTime) + " alle " + vm.getHours(cells[0].EndTime));
 
                         $("#calendarModalList").empty();
 
-                        for (let cell of cells){
+                        for (let cell of cells) {
                             let li = document.createElement("li");
                             li.className = "list-group-item calendar-li";
                             li.innerText = cell.TeacherName + " " + cell.TeacherSurname;
 
-                            let div=document.createElement("div");
-                            if(isHome) {
+                            let div = document.createElement("div");
+                            if (isHome) {
                                 let a = document.createElement("a");
                                 a.className = "btn btn-outline-primary";
                                 a.href = "#";
                                 a.innerText = "Prenota";
-                                // a.style.background = "#fc4a1a";
-                                // a.style.background = "-webkit-linear-gradient(to right, #f7b733, #fc4a1a)";
-                                // a.style.background = "linear-gradient(to right, #f7b733, #fc4a1a)";
-                                // a.style.color = "#fff";
-                                // a.style.border = "1px solid #eee";
-                                // a.style.borderRadius = "10px";
 
                                 a.setAttribute("v-if", "shared.page='home'")
-                                a.onclick = function () {
+                                a.onclick = function() {
                                     $.ajax({
                                         url: "SlotServlet",
                                         data: {
                                             operation: "newBooking",
                                             SlotId: slotNr,
                                             SubjectName: slot_subjects[subject],
-                                            // SubjectName: subject,
                                             TeacherId: cell.TeacherId
                                         },
                                         method: "POST",
-                                        success: function (result) {
+                                        success: function(result) {
                                             if (result.ok) {
                                                 vm.myModal.toggle();
-                                                vm.openError("Prenotato!",true);
+                                                vm.openError("Prenotato!", true);
                                                 vm.refreshCalendar(isHome);
                                             } else {
                                                 vm.openError("Errore: " + result.error);
@@ -852,7 +758,7 @@ var vm = new Vue({
                                     });
                                 };
                                 div.appendChild(a);
-                            }else {
+                            } else {
 
                                 let a = document.createElement("a");
                                 a.className = "btn btn-outline-primary";
@@ -860,8 +766,8 @@ var vm = new Vue({
                                 a.innerText = "Disdici";
                                 a.style.borderColor = "#5D7772";
                                 a.style.color = "whitesmoke";
-                                a.style.marginRight="5px";
-                                a.onclick = function () {
+                                a.style.marginRight = "5px";
+                                a.onclick = function() {
                                     $.ajax({
                                         url: "SlotServlet",
                                         data: {
@@ -869,7 +775,7 @@ var vm = new Vue({
                                             BookingId: cell.BookingId
                                         },
                                         method: "POST",
-                                        success: function (result) {
+                                        success: function(result) {
                                             if (result.ok) {
                                                 vm.myModal.toggle();
                                                 vm.openError("Disdetta!", true);
@@ -887,7 +793,7 @@ var vm = new Vue({
                                 a.innerText = "Completa";
                                 a.style.borderColor = "#5D7772";
                                 a.style.color = "whitesmoke";
-                                a.onclick = function () {
+                                a.onclick = function() {
                                     $.ajax({
                                         url: "SlotServlet",
                                         data: {
@@ -895,7 +801,7 @@ var vm = new Vue({
                                             BookingId: cell.BookingId
                                         },
                                         method: "POST",
-                                        success: function (result) {
+                                        success: function(result) {
                                             if (result.ok) {
                                                 vm.myModal.toggle();
                                                 vm.openError("Completata!", true);
@@ -914,72 +820,41 @@ var vm = new Vue({
                         vm.myModal.show();
                     };
                     slot.append(badge);
-                    //slot.append("<div class='badge' style='background-color:"+ subjectsColors[subject] + "'>" + subject + "</div>" );
                 }
                 i++;
             }
         },
-        refreshCalendarSlots(data,isHome){
+
+        refreshCalendarSlots(data, isHome) {
             $("#calendar td:not(:first-child)").empty();
-            this.createCalendar(data,isHome);
+            this.createCalendar(data, isHome);
         },
-        getSubjects(data,i){
+
+        getSubjects(data, i) {
             var subjects = [];
 
-            /*for(let slot of data){
-                if(slot.SlotId === i || i == null){
-                    let found = false;
-                    for(let subject of subjects){
-                        if (subject === slot.SubjectName){
-                            found = true;
-                            break;
-                        }
-                    }
-                    if (this.selectedSubjects.indexOf(slot.SubjectName)) {
-                        subjects.push(slot.SubjectName);
-                    }
+            for (let k = 0; k < this.selectedSubjects.length; k++) {
+                for (let slot of data) {
 
-                    if(!found){
-                        subjects.push(slot.SubjectName);
-                    }
-                }
-            }*/
-
-
-            for(let k = 0; k < this.selectedSubjects.length; k++)
-            {
-                for(let slot of data) {
-
-                    if (slot.SlotId == i && slot.SubjectName == this.selectedSubjects[k] && !subjects.includes(this.selectedSubjects[k])) {
+                    if (slot.SlotId === i && slot.SubjectName === this.selectedSubjects[k] && !subjects.includes(this.selectedSubjects[k])) {
                         subjects.push(this.selectedSubjects[k]);
-                        console.log(slot.SlotId + "  Materia: " + slot.SubjectName + "  "+JSON.stringify(subjects));
+                        console.log(slot.SlotId + "  Materia: " + slot.SubjectName + "  " + JSON.stringify(subjects));
                         break;
                     }
                 }
             }
-
-            // for(let slot of data)
-            // {
-            // if (this.selectedSubjects.length > 0) {
-            //     for(let sub = 0; sub < this.selectedSubjects.length; sub++) {
-            //         for (let slot of data) {
-            //             console.log(slot.SlotId + "materia " + slot.SubjectName);
-            //             if (slot.SlotId == i && slot.SubjectName == this.selectedSubjects[sub]) {
-            //                 subjects.push(this.selectedSubjects[sub]);
-            //                 break;
-            //             }
-            //         }
-            //     }
-            // }
             return subjects;
         },
-        getTeacherList(data,slot,subject){
-            return data.filter((cell)=>cell.SlotId == slot && cell.SubjectName == subject);
+
+        getTeacherList(data, slot, subject) {
+            return data.filter((cell) => cell.SlotId === slot && cell.SubjectName === subject);
         },
-        getHours(dateString){
-            return parseInt(dateString.substr(0,2))+ 12;
+
+        getHours(dateString) {
+            return parseInt(dateString.substr(0, 2)) + 12;
         },
-        deleteTeaching (teaching, teacherId, subject) {
+
+        deleteTeaching(teaching, teacherId, subject) {
             $.ajax({
                 url: "TeachingServlet",
                 data: {
@@ -987,17 +862,18 @@ var vm = new Vue({
                     Id: teaching.Id
                 },
                 method: "POST",
-                success: function (result) {
+                success: function(result) {
                     if (result.ok) {
                         vm.teachingModal.toggle();
-                        vm.refreshTeaching(teacherId,subject);
+                        vm.refreshTeaching(teacherId, subject);
                     } else {
                         vm.openError("Errore: " + result.error);
                     }
                 }
             });
         },
-        newTeaching(teacherID,subjectName, isNullTeacher,teacherName){
+
+        newTeaching(teacherID, subjectName, isNullTeacher, teacherName) {
             console.log(teacherID + "  " + subjectName + "   " + isNullTeacher + "   " + teacherName);
             $.ajax({
                 url: "TeachingServlet",
@@ -1007,17 +883,14 @@ var vm = new Vue({
                     subject: subjectName
                 },
                 method: "POST",
-                success: function (result) {
+                success: function(result) {
                     if (result.ok) {
-                        //teachingModal.toggle();
                         $("#subjectChoose").val("");
-                        // $("#subjectTeachingDDL").val("");
-                        // $("#teacherTeachingDDL").val("");
                         $("#teacherChoose").val("");
-                        if(isNullTeacher) {
+                        if (isNullTeacher) {
                             vm.refreshTeaching(null, subjectName);
-                        }else{
-                            vm.refreshTeaching(teacherID, null,teacherName);
+                        } else {
+                            vm.refreshTeaching(teacherID, null, teacherName);
                         }
                     } else {
                         vm.openError("Errore: " + result.error);
@@ -1026,91 +899,70 @@ var vm = new Vue({
                 }
             });
         },
-        newTeacher (){
-        $.ajax({
-         url:"TeacherServlet",
-         data:{
-             operation:"addTeacher",
-             name: $("#teacherName").val().trim(),
-             surname:$("#teacherSurname").val().trim()
-         },
-         method:"POST",
-         success: function (result){
-             if(result.ok){
-                 vm.refreshTeacher();
-                 vm.reloadAllSubjectTeacher();
-             }else{
-                 vm.openError(result.error);
-             }
-         }
-        })
-        },
-        newSubject(){
-        $.ajax({
-         url:"SubjectsServlet",
-         data: {
-             operation: "addSubject",
-             name: $("#subjectName").val().trim()
-         },
-         method:"POST",
-         success: function (result){
-             if(result.ok){
-                 vm.refreshSubjects();
-                 vm.reloadAllSubjectTeacher();
-             }else{
-                 vm.openError(result.error);
-             }
-         }
-        });
-        },
-        deleteSubject ( subject){
-            $.ajax(
-                {
-                    url: "SubjectsServlet",
-                    data: {
-                        Name: subject.Name,
-                        operation: "deleteSubject"
-                    },
-                    method: "POST",
-                    success: function (result) {
-                        if (result.ok) {
-                            vm.confirmModal.hide();
-                            vm.refreshSubjects();
-                            vm.reloadAllSubjectTeacher();
-                        }else{
-                            vm.openError(result.error);
-                        }
-                    }
-                });
-        },
-        deleteTeaching (teaching, teacherId, subject) {
+
+        newTeacher() {
             $.ajax({
-                url: "TeachingServlet",
+                url: "TeacherServlet",
                 data: {
-                    operation: "deleteTeaching",
-                    Id: teaching.Id
+                    operation: "addTeacher",
+                    name: $("#teacherName").val().trim(),
+                    surname: $("#teacherSurname").val().trim()
                 },
                 method: "POST",
-                success: function (result) {
+                success: function(result) {
                     if (result.ok) {
-                        vm.teachingModal.toggle();
-                        vm.refreshTeaching(teacherId,subject);
+                        vm.refreshTeacher();
+                        vm.reloadAllSubjectTeacher();
                     } else {
-                        vm.openError("Errore: " + result.error);
+                        vm.openError(result.error);
+                    }
+                }
+            })
+        },
+
+        newSubject() {
+            $.ajax({
+                url: "SubjectsServlet",
+                data: {
+                    operation: "addSubject",
+                    name: $("#subjectName").val().trim()
+                },
+                method: "POST",
+                success: function(result) {
+                    if (result.ok) {
+                        vm.refreshSubjects();
+                        vm.reloadAllSubjectTeacher();
+                    } else {
+                        vm.openError(result.error);
                     }
                 }
             });
         },
-        loadSubjectChoose()
-        {
-            console.log(JSON.stringify(this.materie));
+
+        deleteSubject(subject) {
+            $.ajax({
+                url: "SubjectsServlet",
+                data: {
+                    Name: subject.Name,
+                    operation: "deleteSubject"
+                },
+                method: "POST",
+                success: function(result) {
+                    if (result.ok) {
+                        vm.confirmModal.hide();
+                        vm.refreshSubjects();
+                        vm.reloadAllSubjectTeacher();
+                    } else {
+                        vm.openError(result.error);
+                    }
+                }
+            });
         },
+
         login() //login function
         {
             var Username = this.username;
             var Password = $("#loginPassword").val().trim();
-            // console.log(Username);
-            // console.log(Password);
             if (Username && Password) {
                 $.ajax({
                     url: "PageServlet",
@@ -1124,18 +976,9 @@ var vm = new Vue({
                         vm.isAdmin = JSON.stringify(result.data[0].Role);
                         vm.setCookie("isAdmin", JSON.stringify(result.data[0].Role));
                         console.log(vm.isAdmin);
-                        // this.setCookie("username", this.username);
-                        // this.isLogged = true;
-                        // console.log(this.isLogged);
-                        // username = this.username;
-                        // console.log(username);
                         if (result.ok) {
-                            // this.role = result.data[0].role;
-                            // document.getElementById("role").innerHTML = this.isLogged;
-                            // console.log("Username" + document.getElementById("username").innerHTML);
                             window.location.hash = "";
                             window.location.href = "index.html";
-                            // window.location.href = "index.html";
                         } else {
                             vm.loginModal.hide();
                             vm.openError(result.error);

@@ -1,136 +1,155 @@
-body{
-    /*background-color: #202125;*/
+body
+{
     background-color: #1f2125;
-    /*background-color: rebeccapurple;*/
     max-width:100% !important;
 }
 
-.pageContent{
+.pageContent
+{
     width: 100%;
 }
-.burger div{
+
+.burger div
+{
     width: 25px;
     height: 3px;
     background-color:white;
     margin: 5px;
     transition: all 0.3s ease;
 }
-@media screen and (min-width: 992px){
-    .body{
+
+@media screen and (min-width: 992px)
+{
+    .body
+    {
         overflow-x:hidden ;
     }
 
-    .burger{
+    .burger
+    {
         display: block;
     }
 }
-.nav-active{
+
+.nav-active
+{
     transform: translateX(0%);
 }
-@keyframes navLinkFade {
-    from{
+
+@keyframes navLinkFade
+{
+    from
+    {
         opacity: 0;
         transform: translateX(50px);
     }
-    to{
+    to
+    {
         opacity: 1;
         transform: translateX(0px);
     }
 }
 
-
-
-.toggle .lin1{
+.toggle .lin1
+{
     transform: rotate(-45deg) translate(-5px,6px);
 }
 
-.toggle .lin2{
+.toggle .lin2
+{
     opacity: 0;
 }
-.toggle .lin3{
+
+.toggle .lin3
+{
     transform: rotate(45deg) translate(-5px,-6px);
 }
 
-
-h1{
+h1
+{
     color: whitesmoke;
 }
-#navbar{
-    /*position: fixed;*/
+
+#navbar
+{
     top: 0;
     width: 100%;
     overflow: hidden;
 }
-#pageContainer{
+
+#pageContainer
+{
     margin-top: 5%;
 }
 
-.btn-custom{
+.btn-custom
+{
     background-color : #B6E2D3;
     border-color: #5D7772;
     margin-left: 5px;
     font-size:14px;
     padding:5px 9px 5px 9px;
-
 }
-.btn-custom:hover, .btn-custom:focus{
+
+.btn-custom:hover, .btn-custom:focus
+{
     background-color : #B6E2D3 !important;
     border-color: #5D7772 !important;
     opacity: .65;
 }
-.icon-custom{
+
+.icon-custom
+{
     color: black;
     font-size: 14px;
 }
 
-.subjectCheck{
+.subjectCheck
+{
 
 }
 
-table.table-hover {
+table.table-hover
+{
     --bs-table-hover-bg: rgb(75, 79, 82) !important;
 }
 
-/*.list-li{*/
-/*    display : flex;*/
-/*    align-items : center;*/
-/*    justify-content : space-between;*/
-/*    background-color: #2c2e2f;*/
-/*    color: black;*/
-/*    border: 0;*/
-/*}*/
-
-.list-li{
+.list-li
+{
     display : flex;
     align-items : center;
     justify-content : space-between;
-    /*background-color: #2c2e2f;*/
-    /*color: whitesmoke;*/
     background: var(--color-300);
     color: black;
     border: 1px outset var(--color-200);
     border-radius: 5px;
 }
-*.list-li:hover{
+
+*.list-li:hover
+{
     transition-duration: 0.3s;
     transform: scale(1.01);
 }
 
-#TeachingModal li:not(:last-child){
+#TeachingModal li:not(:last-child)
+{
     border-bottom: 1px solid gray !important;
 }
 
-#confirmModal,#errorModal{
+#confirmModal,#errorModal
+{
     z-index: 1200;
 }
 
-.teachingHRline{
+.teachingHRline
+{
     background-color: white !important;
     opacity: 75%;
     width: 100%;
 }
 
-.screenreader{
+.screenreader
+{
     clip: rect(1px, 1px, 1px, 1px);
     clip-path: inset(50%);
     height: 1px;
@@ -140,19 +159,22 @@ table.table-hover {
     position: absolute;
 }
 
-.bookIcon{
+.bookIcon
+{
     float: left;
     margin-left:5px;
     cursor: initial
 }
 
-.btn-log{
+.btn-log
+{
     border-color:#5D7772 !important;
     background-color: #B6E2D3 !important;
     color: black !important;
 }
 
-.filter{
+.filter
+{
     color: whitesmoke;
     background-color:#2c2e2f ;
     width: 90%;
@@ -160,23 +182,26 @@ table.table-hover {
     margin: 0 auto
 }
 
-.textButton{
+.textButton
+{
     border-color:#5D7772  !important;
     background-color: #B6E2D3 !important;
     color: black !important;
 }
 
-.textInput{
-    /*background-color: grey !important;*/
+.textInput
+{
     color: black;
     opacity:75%
 }
 
-.modal .textInput{
+.modal .textInput
+{
     opacity: 100% !important;
 }
 
-.modal-colors{
+.modal-colors
+{
     background-color: #2c2e2f;
     color: whitesmoke
 }
@@ -216,6 +241,7 @@ table.table-hover {
     transition:all 0.7s ease;
     border-radius: 5px;
 }
+
 *.btn-custom:hover
 {
     background-position:left bottom;
@@ -223,25 +249,32 @@ table.table-hover {
     border: 1px solid #2c2e2f;
 }
 
-@media (min-width: 992px) {
-    .col-lg-3 {
+@media (min-width: 992px)
+{
+    .col-lg-3
+    {
         padding-left: 10%;
     }
 
-    h2{
+    h2
+    {
         margin-left: -1.2em !important;
     }
 }
 
-h2{
+h2
+{
     margin-left: -1.6em;
 }
 
-.form-check-input:checked {
+.form-check-input:checked
+{
     background-color: var(--color-400)!important;
     border-color: var(--color-200) !important;
 }
-.form-check-input:focus, .form-select:focus {
+
+.form-check-input:focus, .form-select:focus
+{
     box-shadow: 0 0 0 0.25rem var(--color-200) !important;
 }
 
