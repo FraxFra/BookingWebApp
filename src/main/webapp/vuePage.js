@@ -34,9 +34,15 @@ var vm = new Vue({
         } else {
             this.isLogged = false;
         }
-        console.log("IsAdmin: " + this.isAdmin + " isLogged" + this.isLogged);
+        console.log("username: " + this.username + " isLogged" + this.isLogged);
 
         $("#loginPassword").on("keypress", function(event) {
+            if (event.which === 13) { //quando si preme invio
+                vm.login();
+            }
+        });
+
+        $("#loginUsername").on("keypress", function(event) {
             if (event.which === 13) { //quando si preme invio
                 vm.login();
             }
@@ -680,7 +686,7 @@ var vm = new Vue({
 
             const subjectsColors = this.associateColors(data);
 
-            const myModal = this.myModal;
+            const myModal = new bootstrap.Modal(document.getElementById('calendarModal'));
 
             let i = 1;
 
@@ -973,13 +979,12 @@ var vm = new Vue({
                     },
                     method: "POST",
                     success: function(result) {
-                        vm.isAdmin = JSON.stringify(result.data[0].Role);
-                        vm.setCookie("isAdmin", JSON.stringify(result.data[0].Role));
-                        console.log(vm.isAdmin);
                         if (result.ok) {
                             window.location.hash = "";
                             window.location.href = "index.html";
                         } else {
+                            vm.username = "";
+                            $("#loginPassword").val("");
                             vm.loginModal.hide();
                             vm.openError(result.error);
                         }
