@@ -31,13 +31,13 @@
                                 <a class="nav-link active me-1" aria-current="page" href="#" v-on:click="refreshPage('home')" data-bs-dismiss="offcanvas" aria-hidden="true">Home</a>
                             </li>
                             <li>
-                                <a v-if="isLogged" class="nav-link active me-1" aria-current="page" href="#" v-on:click="refreshPage('bookingList')" data-bs-dismiss="offcanvas">Prenotazioni</a>
+                                <a v-show="isLogged === true" class="nav-link active me-1" aria-current="page" href="#" v-on:click="refreshPage('bookingList')" data-bs-dismiss="offcanvas">Prenotazioni</a>
                             </li>
                             <li>
-                                <a v-if="isLogged && isAdmin" class="nav-link active" aria-current="page" href="#" v-on:click="refreshPage('teacher')" data-bs-dismiss="offcanvas">Insegnanti</a>
+                                <a v-show="isLogged === true && isAdmin === true" class="nav-link active" aria-current="page" href="#" v-on:click="refreshPage('teacher')" data-bs-dismiss="offcanvas">Insegnanti</a>
                             </li>
                             <li>
-                                <a v-if="isLogged && isAdmin" class="nav-link active" aria-current="page" href="#" v-on:click="refreshPage('subjects')" data-bs-dismiss="offcanvas">Corsi</a>
+                                <a v-show="isLogged === true && isAdmin === true" class="nav-link active" aria-current="page" href="#" v-on:click="refreshPage('subjects')" data-bs-dismiss="offcanvas">Corsi</a>
                             </li>
                         </ul>
                     </div>

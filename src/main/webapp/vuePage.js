@@ -26,7 +26,7 @@ var vm = new Vue({
         this.loginModal = new bootstrap.Modal(document.getElementById('exampleModalToggle'));
         this.teachingModal = new bootstrap.Modal(document.getElementById('TeachingModal'));
         this.username = this.getCookie("username");
-        this.isAdmin = this.getCookie("isAdmin");
+        this.isAdmin = this.getCookie("isAdmin") === "true";
 
         console.log("Username: " + this.username);
         if (this.username) {
@@ -34,7 +34,6 @@ var vm = new Vue({
         } else {
             this.isLogged = false;
         }
-        console.log("username: " + this.username + " isLogged" + this.isLogged);
 
         $("#loginPassword").on("keypress", function(event) {
             if (event.which === 13) { //quando si preme invio
@@ -94,6 +93,8 @@ var vm = new Vue({
             $("#loginUsername").val(y);
             (new bootstrap.Modal(document.getElementById('exampleModalToggle'))).toggle();
         }
+
+        console.log("username: " + this.username + " isLogged" + this.isLogged + " isAdmin" + this.isAdmin);
     },
 
     watch: {
@@ -188,6 +189,44 @@ var vm = new Vue({
                     }
                 }
             });
+        },
+
+        login() //login function
+        {
+            var Username = this.username;
+            var Password = $("#loginPassword").val().trim();
+            if (Username && Password) {
+                $.ajax({
+                    url: "PageServlet",
+                    data: {
+                        operation: "login",
+                        Username: Username,
+                        Password: Password
+                    },
+                    method: "POST",
+                    success: function(result) {
+                        if (result.ok) {
+                            if(result.data[0].Role) {
+                                vm.isAdmin = true;
+                                vm.setCookie("isAdmin", true);
+                            } else {
+                                vm.isAdmin = false;
+                                vm.setCookie("isAdmin", false);
+                            }
+                            vm.isLogged = true;
+                            window.location.hash = "";
+                            window.location.href = "index.html";
+                        } else {
+                            vm.username = "";
+                            $("#loginPassword").val("");
+                            vm.loginModal.hide();
+                            vm.openError(result.error);
+                        }
+                    }
+                });
+            } else {
+                alert("Inserire tutti i campi!");
+            }
         },
 
         setCookie(cname, cvalue) {
@@ -963,36 +1002,6 @@ var vm = new Vue({
                     }
                 }
             });
-        },
-
-        login() //login function
-        {
-            var Username = this.username;
-            var Password = $("#loginPassword").val().trim();
-            if (Username && Password) {
-                $.ajax({
-                    url: "PageServlet",
-                    data: {
-                        operation: "login",
-                        Username: Username,
-                        Password: Password
-                    },
-                    method: "POST",
-                    success: function(result) {
-                        if (result.ok) {
-                            window.location.hash = "";
-                            window.location.href = "index.html";
-                        } else {
-                            vm.username = "";
-                            $("#loginPassword").val("");
-                            vm.loginModal.hide();
-                            vm.openError(result.error);
-                        }
-                    }
-                });
-            } else {
-                alert("Inserire tutti i campi!");
-            }
         }
     }
 });
